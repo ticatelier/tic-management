@@ -74,6 +74,21 @@ Route::group(['prefix' => 'dashboard/user', 'middleware' => ['auth', 'verified']
     Route::group(['prefix' => 'trainer'], function(){
         Route::get('/', [TrainerController::class, 'index'])->name('');
     });
+
+
+});
+
+Route::group(['middleware' => ['role:super-admin|admin']], function() {
+
+    Route::resource('permissions', App\Http\Controllers\PermissionController::class);
+    Route::get('permissions/{permissionId}/delete', [App\Http\Controllers\PermissionController::class, 'destroy']);
+
+    Route::resource('roles', App\Http\Controllers\RoleController::class);
+    Route::get('roles/{roleId}/delete', [App\Http\Controllers\RoleController::class, 'destroy']);
+    Route::get('roles/{roleId}/give-permissions', [App\Http\Controllers\RoleController::class, 'addPermissionToRole']);
+    Route::put('roles/{roleId}/give-permissions', [App\Http\Controllers\RoleController::class, 'givePermissionToRole']);
+
+
 });
 
 require __DIR__.'/auth.php';

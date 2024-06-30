@@ -11,10 +11,8 @@
                         <a href="#"><i class="la la-dashcube"></i> <span> Analytics</span> <span
                                 class="menu-arrow"></span></a>
                         <ul>
-                            <li><a href="{{ route('admin.analytics.monthly') }}" class="active">Monthly Attendance</a></li>
-                            <li><a href="">Employee Dashboard</a></li>
-                            <li><a href="">Deals Dashboard</a></li>
-                            <li><a href="">Leads Dashboard</a></li>
+                            <li><a href="{{ route('admin.analytics.monthly') }}">Monthly Attendance</a></li>
+
                         </ul>
                     </li>
 
@@ -66,7 +64,8 @@
                         <ul>
                             <li><a href="{{ route('admin.administrators.index') }}">All Administrators</a></li>
                             <li><a href="{{ route('admin.administrators.create') }}">Add Administrator</a></li>
-                            <li><a href="">Administrators' Permissions</a></li>
+                            <li><a href="{{ url('roles') }}">Roles</a></li>
+                            <li><a href="{{ url('permissions') }}">Permissions</a></li>
                         </ul>
                     </li>
 
@@ -81,10 +80,8 @@
                     <a href="#"><i class="la la-dashcube"></i> <span> Analytics</span> <span
                             class="menu-arrow"></span></a>
                     <ul>
-                        <li><a href="{{ route('admin.analytics.monthly') }}" class="active">Monthly Attendance</a></li>
-                        <li><a href="">Employee Dashboard</a></li>
-                        <li><a href="">Deals Dashboard</a></li>
-                        <li><a href="">Leads Dashboard</a></li>
+                        <li><a href="{{ route('admin.analytics.monthly') }}">Monthly Attendance</a></li>
+
                     </ul>
                 </li>
 
@@ -136,7 +133,8 @@
                     <ul>
                         <li><a href="{{ route('admin.administrators.index') }}">All Administrators</a></li>
                         <li><a href="{{ route('admin.administrators.create') }}">Add Administrator</a></li>
-                        <li><a href="">Administrators' Permissions</a></li>
+                        <li><a href="{{ url('roles') }}">Roles</a></li>
+                    <li><a href="{{ url('permissions') }}">Permissions</a></li>
                     </ul>
                 </li>
 
