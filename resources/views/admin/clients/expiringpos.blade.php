@@ -1,7 +1,6 @@
 @extends('layouts.admin.app')
 
 @push('css')
-    {{-- <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/select2.min.css') }}">
 @endpush
@@ -14,21 +13,21 @@
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="page-title">Trainers</h3>
+                        <h3 class="page-title">Users Subscriptions</h3>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Trainers</li>
+                            <li class="breadcrumb-item active">Expiring POS</li>
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
-                        <a href="{{ route('admin.trainer.create') }}"><button class="btn btn-info" data-bs-toggle="modal"
-                                data-bs-target="#add_trainer"><i class="fa-solid fa-plus"></i> Add New</button></a>
+                        <a href="{{ route('admin.users.subscription.add') }}" ><button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#add_trainer"><i
+                                class="fa-solid fa-plus"></i> Update Pos Number</button></a>
                     </div>
                 </div>
             </div>
 
-
             <div class="row">
+                <h1 class="text-center">POS Number Expiring in {{ $month }}</h1>
                 <div class="col-md-12">
                     <div class="table-responsive">
                         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
@@ -58,16 +57,19 @@
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
                                                     rowspan="1" colspan="1"
                                                     aria-label="Name : activate to sort column ascending"
-                                                    style="width: 140.922px;">Name </th>
+                                                    style="width: 140.922px;">Client Name </th>
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
                                                     rowspan="1" colspan="1"
-                                                    aria-label="Contact Number : activate to sort column ascending"
-                                                    style="width: 115.406px;">Contact Number </th>
+                                                    aria-label="Pos Number : activate to sort column ascending"
+                                                    style="width: 115.406px;">Pos Number </th>
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
                                                     rowspan="1" colspan="1"
-                                                    aria-label="Email : activate to sort column ascending"
-                                                    style="width: 178.703px;">Email </th>
-
+                                                    aria-label="Start Date : activate to sort column ascending"
+                                                    style="width: 178.703px;">Start Date </th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
+                                                    rowspan="1" colspan="1"
+                                                    aria-label="Due Date : activate to sort column ascending"
+                                                    style="width: 119.109px;">Due Date </th>
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
                                                     rowspan="1" colspan="1"
                                                     aria-label="Status : activate to sort column ascending"
@@ -90,18 +92,19 @@
                                                     <td class="sorting_1">{{ $i = $i + 1 }}</td>
                                                     <td>
                                                         <h2 class="table-avatar">
-                                                            <a href="">{{ $user->name }} </a>
+                                                            <a href="">{{ $user->user->name }} </a>
                                                         </h2>
                                                     </td>
-                                                    <td>9876543210</td>
-                                                    <td>{{ $user->email }}</td>
+                                                    <td>{{ $user->posnumber }}</td>
+                                                    <td>{{ $user->startdate }}</td>
+                                                    <td>{{ $user->duedate }}</td>
                                                     <td>
                                                         <div class="dropdown action-label">
                                                             <a class="btn btn-white btn-sm btn-rounded dropdown-toggle"
                                                                 href="#" data-bs-toggle="dropdown"
                                                                 aria-expanded="false">
-                                                                <i class="fa-regular fa-circle-dot text-danger"></i>
-                                                                Inactive
+                                                                <i class="fa-regular fa-circle-dot text-success"></i>
+                                                                    Active
                                                             </a>
                                                             <div class="dropdown-menu">
                                                                 <a class="dropdown-item" href="#"><i
@@ -119,21 +122,12 @@
                                                                 data-bs-toggle="dropdown" aria-expanded="false"><i
                                                                     class="material-icons">more_vert</i></a>
                                                             <div class="dropdown-menu dropdown-menu-right">
-                                                                <form action="{{ route('admin.trainer.edit') }}">
-                                                                    <input type="text" name="id" value="{{ $user->id }}" hidden>
-                                                                    <button class="dropdown-item" href="#"
-                                                                        data-bs-toggle="modal" data-bs-target="#edit_type"><i
-                                                                            class="fa-solid fa-pencil m-r-5"></i> Edit</button>
-                                                                </form>
-                                                                <form action="{{ route('admin.trainer.delete') }}">
-                                                                    <input type="text" name="id" value="{{ $user->id }}" hidden>
-
-                                                                    <button class="dropdown-item" href="#"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#delete_type"><i
-                                                                            class="fa-regular fa-trash-can m-r-5"></i>
-                                                                        Delete</button>
-                                                                </form>
+                                                                <a class="dropdown-item" href="#"
+                                                                    data-bs-toggle="modal" data-bs-target="#edit_type"><i
+                                                                        class="fa-solid fa-pencil m-r-5"></i> Edit</a>
+                                                                <a class="dropdown-item" href="#"
+                                                                    data-bs-toggle="modal" data-bs-target="#delete_type"><i
+                                                                        class="fa-regular fa-trash-can m-r-5"></i> Delete</a>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -180,9 +174,6 @@
 
 @push('js')
     <script src="{{ asset('assets/js/select2.min.js') }}" type="text/javascript"></script>
-    {{-- <script src="{{ asset('assets/plugins/select2/js/select2.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/plugins/select2/js/custom-select.js') }}" type="text/javascript"></script> --}}
-
     <script src="{{ asset('assets/js/moment.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }}" type="text/javascript"></script>

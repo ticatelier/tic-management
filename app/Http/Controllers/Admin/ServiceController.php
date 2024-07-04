@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\ServiceType;
 use App\Models\ServiceOption;
 use App\Models\ServiceNote;
+use App\Models\User;
 use Alert;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
@@ -16,8 +17,13 @@ class ServiceController extends Controller
 {
     private function access(){
         $role = User::find(Auth::id())->role;
-        if($role != 'superadmin' || $role != 'admin')
+        if($role == 'superadmin')
         {
+            return 'access';
+        }elseif($role == 'superadmin'){
+            return 'access';
+        }
+        else{
             return 'no access';
         }
     }
@@ -183,5 +189,28 @@ class ServiceController extends Controller
         //     echo $date;
         // }
         return view('admin.analytics.viewMonthly', ['attendance' => $attendance, 'dates' => $dates, 'days' => $days, 'month' => $month, 'year' => $year]);
+    }
+
+    public function todayServiceNotes()
+    {
+        $date = Carbon::now();
+        $monthName = $date->format('F');
+        $day = $date->format('l');
+        $year = $date->format('Y');
+
+        $notes = ServiceNote::where(
+            [
+                'day' => $day,
+                'month' => $monthName,
+                'year' => $year
+            ]
+        )->get();
+
+        return view('admin.analytics.serviceNotesLog', ['notes' => $notes]);
+    }
+
+    public function servicenote(Request $request){
+        $note = ServiceNote::where('id', $request->id)->first();
+        return view('admin.analytics.singleServiceNote', ['note' => $note]);
     }
 }

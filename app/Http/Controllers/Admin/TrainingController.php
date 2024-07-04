@@ -14,8 +14,13 @@ class TrainingController extends Controller
 {
     private function access(){
         $role = User::find(Auth::id())->role;
-        if($role != 'superadmin' || $role != 'admin')
+        if($role == 'superadmin')
         {
+            return 'access';
+        }elseif($role == 'superadmin'){
+            return 'access';
+        }
+        else{
             return 'no access';
         }
     }
@@ -81,7 +86,7 @@ class TrainingController extends Controller
             return redirect()->back();
         }
         $request->validate([
-            'email' => 'unique:users|required',
+            'email' => 'required',
             'name' => 'required'
         ]);
 

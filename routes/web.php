@@ -25,8 +25,12 @@ Route::group(['prefix' => 'dashboard/admin', 'middleware' => ['auth', 'verified'
         Route::get('/add-users', [ClientController::class, 'create'])->name('admin.users.create');
         Route::post('/add-users', [ClientController::class, 'store'])->name('admin.users.store');
         Route::get('/subscriptions', [ClientController::class, 'subscription'])->name('admin.users.subscription');
+        Route::get('/expiring', [ClientController::class, 'expiringPOS'])->name('admin.users.expiring');
         Route::get('/add-subscriptions', [ClientController::class, 'addsubscription'])->name('admin.users.subscription.add');
         Route::post('/add-subscriptions', [ClientController::class, 'storesubscription'])->name('admin.users.subscription.store');
+        Route::get('/edit-users', [ClientController::class, 'edit'])->name('admin.users.edit');
+        Route::post('/edit-users', [ClientController::class, 'update'])->name('admin.users.update');
+        Route::post('/delete-users', [ClientController::class, 'destroy'])->name('admin.users.destroy');
 
     });
 
@@ -34,6 +38,9 @@ Route::group(['prefix' => 'dashboard/admin', 'middleware' => ['auth', 'verified'
         Route::get('/', [AdminController::class, 'index'])->name('admin.administrators.index');
         Route::get('/add-administrators', [AdminController::class, 'create'])->name('admin.administrators.create');
         Route::post('/add-administrators', [AdminController::class, 'store'])->name('admin.administrators.store');
+        Route::get('/edit-administrators', [AdminController::class, 'edit'])->name('admin.administrators.edit');
+        Route::post('/edit-administrators', [AdminController::class, 'update'])->name('admin.administrators.update');
+        Route::post('/delete-administrators', [AdminController::class, 'destroy'])->name('admin.administrators.destroy');
     });
 
     Route::group(['prefix' => 'trainer'], function(){
@@ -42,20 +49,33 @@ Route::group(['prefix' => 'dashboard/admin', 'middleware' => ['auth', 'verified'
         Route::post('/assign-trainer', [TrainingController::class, 'assign_store'])->name('admin.trainer.assign.store');
         Route::get('/add-trainer', [TrainingController::class, 'create'])->name('admin.trainer.create');
         Route::post('/add-trainer', [TrainingController::class, 'store'])->name('admin.trainer.store');
+        Route::get('/edit-trainer', [TrainingController::class, 'edit'])->name('admin.trainer.edit');
+        Route::post('/edit-trainer', [TrainingController::class, 'update'])->name('admin.trainer.update');
+        Route::post('/delete-trainer', [TrainingController::class, 'destroy'])->name('admin.trainer.destroy');
     });
 
     Route::group(['prefix' => 'service'], function(){
         Route::get('/', [ServiceController::class, 'index'])->name('admin.service.index');
         Route::get('/add-service', [ServiceController::class, 'create'])->name('admin.service.create');
         Route::post('/add-service', [ServiceController::class, 'store'])->name('admin.service.store');
+        Route::get('/edit-service', [ServiceController::class, 'edit'])->name('admin.service.edit');
+        Route::post('/edit-service', [ServiceController::class, 'update'])->name('admin.service.update');
+        Route::post('/delete-service', [ServiceController::class, 'destroy'])->name('admin.service.destroy');
         Route::get('/options', [ServiceController::class, 'option'])->name('admin.service.option');
         Route::get('/options/create', [ServiceController::class, 'option_create'])->name('admin.service.option.create');
         Route::post('/options/store', [ServiceController::class, 'option_store'])->name('admin.service.option.store');
+        Route::get('/edit-options', [ServiceController::class, 'option_edit'])->name('admin.service.option.edit');
+        Route::post('/edit-options', [ServiceController::class, 'option_update'])->name('admin.service.option.update');
+        Route::post('/delete-options', [ServiceController::class, 'option_destroy'])->name('admin.service.option.destroy');
     });
 
     Route::group(['prefix' => 'analytics'], function(){
         Route::get('/get-monthly-attendance', [ServiceController::class, 'pre_calender'])->name('admin.analytics.monthly');
         Route::post('/get-monthly-attendance', [ServiceController::class, 'calender'])->name('admin.analytics.monthly.get');
+        Route::get('/get-today-servicenotes', [ServiceController::class, 'todayServiceNotes'])->name('admin.analytics.servicenote.today');
+        Route::get('/get-servicenotes-list', [ServiceController::class, 'servicenotelist'])->name('admin.analytics.servicenote.list');
+        Route::get('/get-servicenote', [ServiceController::class, 'servicenote'])->name('admin.analytics.servicenote');
+
     });
 });
 

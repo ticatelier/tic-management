@@ -15,9 +15,28 @@ use Carbon\Carbon;
 
 class ServiceNoteController extends Controller
 {
-    public function note(){
+    public function note(Request $request){
+        $date = Carbon::now();
+        $monthName = $date->format('F');
+        $day = $date->format('l');
+        $year = $date->format('Y');
+
+        $check = ServiceNote::where([
+            'client_id' => $request->client,
+            'trainer_id' => Auth::id(),
+            'month' => $monthName,
+            'day' => $day,
+            'year' => $year,
+        ])->first();
+
+        if($check != null){
+            Alert::error('Duplicate', 'Service note has been added for today');
+            return redirect()->back();
+        }
+
         $myclients = AssignTrainer::where('trainer_id', User::find(Auth::id())->id)->get();
-        return view('trainer.services.note', ['myclients' => $myclients]);
+        $client = User::where('id', $request->client)->first();
+        return view('trainer.services.note', ['myclients' => $myclients, 'client' => $client]);
     }
 
     public function note_create(Request $request)
@@ -38,21 +57,14 @@ class ServiceNoteController extends Controller
         $end = Carbon::parse($request->timeout);
         $hours = $start->diffInHours($end);
 
+
         $date = Carbon::now();
         $monthName = $date->format('F');
         $day = $date->format('l');
         $year = $date->format('Y');
 
-        $check = ServiceNote::where([
-            'client_id' => $request->client,
-            'trainer_id' => Auth::id(),
-            'month' => $monthName,
-            'day' => $day,
-            'year' => $year,
-        ])->first();
-
-        if($check != null){
-            Alert::error('Duplicate', 'Service note has been added for today');
+        if($hours <= 0){
+            Alert::error('Invalid Hours Spent', 'Check your time in and time out values');
             return redirect()->back();
         }
 

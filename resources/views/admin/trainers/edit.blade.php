@@ -37,7 +37,7 @@
                                     <div class="alert alert-danger">{{ $error }}</div>
                                 @endforeach
                             @endif
-                            <form method="POST" action="{{ route('admin.trainer.store') }}">
+                            <form method="POST" action="{{ route('admin.trainer.update') }}">
                                 @csrf
                                 <input type="text" name="id" value="{{ $user->id }}" hidden>
                                 <div class="input-block mb-3 row">

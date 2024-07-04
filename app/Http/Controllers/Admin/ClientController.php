@@ -10,13 +10,19 @@ use App\Models\ClientSubscription;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Alert;
+use Carbon\Carbon;
 
 class ClientController extends Controller
 {
     private function access(){
         $role = User::find(Auth::id())->role;
-        if($role != 'superadmin' || $role != 'admin')
+        if($role == 'superadmin')
         {
+            return 'access';
+        }elseif($role == 'superadmin'){
+            return 'access';
+        }
+        else{
             return 'no access';
         }
     }
@@ -72,6 +78,17 @@ class ClientController extends Controller
 
 
     }
+    public function edit(Request $request)
+    {
+        $access = $this->access();
+        if($access == 'no access'){
+            Alert::error('Access Denied', 'You are trespassing and going beyond limits');
+            return redirect()->back();
+        }
+        $user = User::where('id', $request->id)->first();
+        $all = ServiceType::orderBy('type', 'asc')->get();
+        return view('admin.clients.edit', ['all' => $all, 'user' => $user]);
+    }
 
     public function update(Request $request)
     {
@@ -80,6 +97,26 @@ class ClientController extends Controller
             Alert::error('Access Denied', 'You are trespassing and going beyond limits');
             return redirect()->back();
         }
+
+        $request->validate([
+            'email' => 'required',
+            'name' => 'required',
+            'service' => 'required',
+        ]);
+
+        User::where('id', $request->id)
+            ->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+
+        ClientSubscription::where('user_id', $request->id,)
+            ->update([
+            'service_option_id' => $request->service
+        ]);
+
+        Alert::success('Successful', $request->name.' has be updated successfully');
+        return redirect()->back();
     }
 
     public function destroy(Request $request)
@@ -101,7 +138,7 @@ class ClientController extends Controller
             Alert::error('Access Denied', 'You are trespassing and going beyond limits');
             return redirect()->back();
         }
-        $all = ClientSubscription::where('status', 'active')->get();
+        $all = ClientSubscription::where('status', 'active')->orderBy('duedate', 'asc')->get();
         return view('admin.clients.subcriptions', ['all' => $all]);
     }
 
@@ -140,5 +177,21 @@ class ClientController extends Controller
 
         Alert::success('Successful', $request->posnumber.' has be added successfully to '.$user->user->name);
         return redirect()->back();
+    }
+
+    public function expiringPOS(){
+        $date = Carbon::now();
+        $monthYear = $date->format('Y-m');
+        $month = $date->format('F');
+        $allposnumbers = ClientSubscription::where('status', 'active')->orderBy('duedate', 'asc')->get();
+        $all = [];
+
+        foreach($allposnumbers as $number){
+            if(Carbon::parse($number->duedate)->format('Y-m') == $monthYear){
+                $all[] = $number;
+            }
+        }
+
+        return view('admin.clients.expiringpos', ['all' => $all, 'month' => $month]);
     }
 }

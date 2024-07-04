@@ -12,9 +12,14 @@ use Alert;
 class AdminController extends Controller
 {
     private function access(){
-        $role = User::find(Auth::id())->role;
-        if($role != 'superadmin' || $role != 'admin')
+        $role = User::find(Auth::id())->first()->role;
+        if($role == 'superadmin')
         {
+            return 'access';
+        }elseif($role == 'superadmin'){
+            return 'access';
+        }
+        else{
             return 'no access';
         }
     }

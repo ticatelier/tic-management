@@ -46,10 +46,14 @@
                                 <label class="col-form-label col-md-2">Client</label>
                                 <div class="col-md-10">
                                     <select name="client" class="form-control form-select">
-                                        <option value="" selected disabled>-Select a Client</option>
+                                        <option value="" disabled>-Select a Client</option>
+                                        @if ($client != null)
+                                            <option value="{{ $client->id }}">{{ $client->name }}</option>
+                                        @endif
+                                        {{-- <option value="" disabled>--Other Clients--</option>
                                         @foreach ($myclients as $myclient)
                                             <option value="{{ $myclient->client_id }}">{{ $myclient->client->name }}</option>
-                                        @endforeach
+                                        @endforeach --}}
 
                                     </select>
                                 </div>

@@ -29,7 +29,7 @@
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title mb-0">Add Administrator</h4>
+                            <h4 class="card-title mb-0">Edit Permission</h4>
                         </div>
                         <div class="card-body">
                             @if($errors)

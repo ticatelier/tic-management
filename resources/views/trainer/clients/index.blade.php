@@ -94,7 +94,8 @@
                                                     <td>{{ $user->created_at }}</td>
                                                     <td>
                                                         <form method="GET" action="{{ route('trainer.services.note') }}">
-                                                            <input type="text" name="id" value="{{ $user->id }}" hidden>
+                                                            @csrf
+                                                            <input type="text" name="client" value="{{ $user->client_id }}" hidden>
                                                             <button type="submit" class="btn btn-info float-end">Today's Service Note</button>
                                                         </form>
                                                     </td>

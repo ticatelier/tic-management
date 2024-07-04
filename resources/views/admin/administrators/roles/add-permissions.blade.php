@@ -12,15 +12,15 @@
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="page-title">Get Monthly Attendance</h3>
+                        <h3 class="page-title">Administrators</h3>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Get Monthly Attendance</li>
+                            <li class="breadcrumb-item"><a href="admin-dashboard.html">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Roles</li>
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
-                        <a href="{{ route('dashboard') }}"><button class="btn btn-info" data-bs-toggle="modal"
-                                data-bs-target="#add_trainer"> Dashboard</button></a>
+                        <a href="{{ url('roles') }}"><button class="btn btn-info" data-bs-toggle="modal"
+                                data-bs-target="#add_trainer"> View Roles</button></a>
                     </div>
                 </div>
             </div>
@@ -29,44 +29,74 @@
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title mb-0">Monthly Attendance</h4>
+                            <h4 class="card-title mb-0">Add Permission</h4>
                         </div>
                         <div class="card-body">
+                            <h4 class="text-center">
+                                Role : {{ $role->name }}
+                            </h4>
                             @if($errors)
                                 @foreach ($errors->all() as $error)
                                     <div class="alert alert-danger">{{ $error }}</div>
                                 @endforeach
                             @endif
-                            <form method="POST" action="{{ route('admin.analytics.monthly.get') }}">
+                            <form method="POST" action="{{ url('roles/'.$role->id.'/give-permissions') }}">
                                 @csrf
-                                <div class="input-block mb-3 row">
-                                    <label class="col-form-label col-md-2">Select Month</label>
+
+                                @foreach ($permissions as $permission)
+                                    <div class="input-block mb-3 row">
+                                        <div class="col-md-12">
+                                            <div class="checkbox">
+                                                <label class="col-form-label">
+                                                    <input
+                                                        type="checkbox"
+                                                        type="checkbox"
+                                                        name="permission[]"
+                                                        value="{{ $permission->name }}"
+                                                        {{ in_array($permission->id, $rolePermissions) ? 'checked':'' }}
+                                                    />
+                                                    {{ $permission->name }}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                                {{-- <div class="input-block mb-3 row">
+                                    <label class="col-form-label col-md-2">Role Name</label>
                                     <div class="col-md-10">
-                                        <select name="month" class="form-control form-select">
-                                            <option value="" selected disabled>-- Select --</option>
-                                            @foreach ($months as $month)
-                                                <option value="{{ $month }}">{{ $month }}</option>
+                                        <input name="name" type="text" class="form-control">
+                                    </div>
+                                </div> --}}
+
+                                {{-- <div class="input-block mb-3 row">
+                                    <label class="col-form-label col-md-2">Email</label>
+                                    <div class="col-md-10">
+                                        <input name="email" type="email" class="form-control" required>
+                                    </div>
+                                </div> --}}
+
+                                {{-- <div class="input-block mb-3 row">
+                                    <label class="col-form-label col-md-2">Service Option</label>
+                                    <div class="col-md-10">
+                                        <select name="service" class="form-control form-select">
+                                            <option value="" selected disabled>-Select Service Option</option>
+                                            @foreach ($all as $service)
+                                                <option value="" disabled>---- {{ $service->type }} ----</option>
+                                                @php
+                                                    $collection = $service->options
+                                                @endphp
+                                                @foreach ($collection as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->option }}</option>
+                                                @endforeach
                                             @endforeach
 
                                         </select>
                                     </div>
-                                </div>
-
-                                <div class="input-block mb-3 row">
-                                    <label class="col-form-label col-md-2">Select Year</label>
-                                    <div class="col-md-10">
-                                        <select name="year" class="form-control form-select">
-                                            <option value="" selected disabled>-- Select --</option>
-                                            @foreach ($years as $year)
-                                                <option value="{{ $year->year }}">{{ $year->year }}</option>
-                                            @endforeach
-
-                                        </select>
-                                    </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="col-auto float-end ms-auto">
-                                    <button type="submit" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#add_trainer"> View Monthly Attendance</button>
+                                    <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#add_trainer"><i
+                                            class="fa-solid fa-plus"></i> Add Role</button>
                                 </div>
                                 {{-- <div class="input-block mb-3 row">
                                     <label class="col-form-label col-md-2">Password</label>

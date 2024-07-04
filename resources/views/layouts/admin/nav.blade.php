@@ -12,7 +12,7 @@
                                 class="menu-arrow"></span></a>
                         <ul>
                             <li><a href="{{ route('admin.analytics.monthly') }}">Monthly Attendance</a></li>
-
+                            <li><a href="{{ route('admin.analytics.servicenote.today') }}">Today's Service Notes</a></li>
                         </ul>
                     </li>
 
@@ -26,6 +26,7 @@
                             <li><a href="{{ route('admin.users.index') }}">All Users</a></li>
                             <li><a href="{{ route('admin.users.create') }}">Add User</a></li>
                             <li><a href="{{ route('admin.users.subscription') }}">Users Subcriptions</a></li>
+                            <li><a href="{{ route('admin.users.expiring') }}">Expiring POS number</a></li>
                         </ul>
                     </li>
 
@@ -81,7 +82,7 @@
                             class="menu-arrow"></span></a>
                     <ul>
                         <li><a href="{{ route('admin.analytics.monthly') }}">Monthly Attendance</a></li>
-
+                        <li><a href="{{ route('admin.analytics.servicenote.today') }}">Today's Service Notes</a></li>
                     </ul>
                 </li>
 
@@ -95,6 +96,7 @@
                         <li><a href="{{ route('admin.users.index') }}">All Users</a></li>
                         <li><a href="{{ route('admin.users.create') }}">Add User</a></li>
                         <li><a href="{{ route('admin.users.subscription') }}">Users Subcriptions</a></li>
+                        <li><a href="{{ route('admin.users.expiring') }}">Expiring POS number</a></li>
                     </ul>
                 </li>
 
