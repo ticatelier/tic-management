@@ -120,13 +120,15 @@
                                                                     class="material-icons">more_vert</i></a>
                                                             <div class="dropdown-menu dropdown-menu-right">
                                                                 <form action="{{ route('admin.trainer.edit') }}">
-                                                                    <input type="text" name="id" value="{{ $user->id }}" hidden>
+                                                                    @csrf
+                                                                    <input type="text" name="vim" value="{{ $user->id }}" hidden>
                                                                     <button class="dropdown-item" href="#"
                                                                         data-bs-toggle="modal" data-bs-target="#edit_type"><i
                                                                             class="fa-solid fa-pencil m-r-5"></i> Edit</button>
                                                                 </form>
-                                                                <form action="{{ route('admin.trainer.delete') }}">
-                                                                    <input type="text" name="id" value="{{ $user->id }}" hidden>
+                                                                <form action="{{ route('admin.trainer.destroy') }}">
+                                                                    @csrf
+                                                                    <input type="text" name="vim" value="{{ $user->id }}" hidden>
 
                                                                     <button class="dropdown-item" href="#"
                                                                         data-bs-toggle="modal"

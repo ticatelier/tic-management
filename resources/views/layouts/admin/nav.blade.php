@@ -12,6 +12,7 @@
                                 class="menu-arrow"></span></a>
                         <ul>
                             <li><a href="{{ route('admin.analytics.monthly') }}">Monthly Attendance</a></li>
+                            <li><a href="{{ route('admin.analytics.servicenote.form') }}">Service Notes</a></li>
                             <li><a href="{{ route('admin.analytics.servicenote.today') }}">Today's Service Notes</a></li>
                         </ul>
                     </li>
@@ -82,6 +83,7 @@
                             class="menu-arrow"></span></a>
                     <ul>
                         <li><a href="{{ route('admin.analytics.monthly') }}">Monthly Attendance</a></li>
+                        <li><a href="{{ route('admin.analytics.servicenote.form') }}">Service Notes</a></li>
                         <li><a href="{{ route('admin.analytics.servicenote.today') }}">Today's Service Notes</a></li>
                     </ul>
                 </li>

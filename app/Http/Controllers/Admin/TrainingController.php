@@ -74,7 +74,7 @@ class TrainingController extends Controller
             Alert::error('Access Denied', 'You are trespassing and going beyond limits');
             return redirect()->back();
         }
-        $user = User::where('id', $request->id)->first();
+        $user = User::where('id', $request->vim)->first();
         return view('admin.trainers.edit', ['user' => $user]);
     }
 
@@ -107,7 +107,7 @@ class TrainingController extends Controller
             Alert::error('Access Denied', 'You are trespassing and going beyond limits');
             return redirect()->back();
         }
-        $id = $request->id;
+        $id = $request->vim;
         User::find(id)->delete();
         Alert::success('Deleted', 'Deleted Successfully');
         return redirect()->back();

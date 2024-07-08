@@ -12,15 +12,15 @@
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="page-title">Users</h3>
+                        <h3 class="page-title">Administrators</h3>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Users</li>
+                            <li class="breadcrumb-item"><a href="admin-dashboard.html">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Administrators</li>
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
-                        <a href="{{ route('admin.users.index') }}"><button class="btn btn-info" data-bs-toggle="modal"
-                                data-bs-target="#add_trainer"> View Users</button></a>
+                        <a href="{{ route('admin.administrators.index') }}"><button class="btn btn-info" data-bs-toggle="modal"
+                                data-bs-target="#add_trainer"> View Administrators</button></a>
                     </div>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title mb-0">Add Users</h4>
+                            <h4 class="card-title mb-0">Add Administrator</h4>
                         </div>
                         <div class="card-body">
                             @if($errors)
@@ -37,23 +37,23 @@
                                     <div class="alert alert-danger">{{ $error }}</div>
                                 @endforeach
                             @endif
-                            <form method="POST" action="{{ route('admin.users.update') }}">
+                            <form method="POST" action="{{ route('admin.administrators.update') }}">
                                 @csrf
                                 <div class="input-block mb-3 row">
                                     <label class="col-form-label col-md-2">Name</label>
                                     <div class="col-md-10">
-                                        <input name="name" value="{{ $user->name }}" type="text" class="form-control">
+                                        <input name="name" type="text" class="form-control" value="{{ $user->name }}">
                                     </div>
                                 </div>
 
                                 <div class="input-block mb-3 row">
                                     <label class="col-form-label col-md-2">Email</label>
                                     <div class="col-md-10">
-                                        <input name="email" value="{{ $user->email }}" type="email" class="form-control" required>
+                                        <input name="email" type="email" value="{{ $user->email }}" class="form-control" required>
                                     </div>
                                 </div>
 
-                                <div class="input-block mb-3 row">
+                                {{-- <div class="input-block mb-3 row">
                                     <label class="col-form-label col-md-2">Service Option</label>
                                     <div class="col-md-10">
                                         <select name="service" class="form-control form-select">
@@ -70,11 +70,11 @@
 
                                         </select>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="col-auto float-end ms-auto">
                                     <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#add_trainer"><i
-                                            class="fa-solid fa-plus"></i> Save Changes</button>
+                                            class="fa-solid fa-plus"></i> Update Administrator</button>
                                 </div>
                                 {{-- <div class="input-block mb-3 row">
                                     <label class="col-form-label col-md-2">Password</label>

@@ -28,6 +28,7 @@ Route::group(['prefix' => 'dashboard/admin', 'middleware' => ['auth', 'verified'
         Route::get('/expiring', [ClientController::class, 'expiringPOS'])->name('admin.users.expiring');
         Route::get('/add-subscriptions', [ClientController::class, 'addsubscription'])->name('admin.users.subscription.add');
         Route::post('/add-subscriptions', [ClientController::class, 'storesubscription'])->name('admin.users.subscription.store');
+        Route::post('/delete-subscriptions', [ClientController::class, 'destroysubscription'])->name('admin.users.subscription.destroy');
         Route::get('/edit-users', [ClientController::class, 'edit'])->name('admin.users.edit');
         Route::post('/edit-users', [ClientController::class, 'update'])->name('admin.users.update');
         Route::post('/delete-users', [ClientController::class, 'destroy'])->name('admin.users.destroy');
@@ -73,6 +74,7 @@ Route::group(['prefix' => 'dashboard/admin', 'middleware' => ['auth', 'verified'
         Route::get('/get-monthly-attendance', [ServiceController::class, 'pre_calender'])->name('admin.analytics.monthly');
         Route::post('/get-monthly-attendance', [ServiceController::class, 'calender'])->name('admin.analytics.monthly.get');
         Route::get('/get-today-servicenotes', [ServiceController::class, 'todayServiceNotes'])->name('admin.analytics.servicenote.today');
+        Route::get('/servicenotes-list', [ServiceController::class, 'servicenoteform'])->name('admin.analytics.servicenote.form');
         Route::get('/get-servicenotes-list', [ServiceController::class, 'servicenotelist'])->name('admin.analytics.servicenote.list');
         Route::get('/get-servicenote', [ServiceController::class, 'servicenote'])->name('admin.analytics.servicenote');
 

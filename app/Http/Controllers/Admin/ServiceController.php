@@ -133,6 +133,16 @@ class ServiceController extends Controller
         return redirect()->back();
     }
 
+    public function option_edit(Request $request){
+        $access = $this->access();
+        if($access == 'no access'){
+            Alert::error('Access Denied', 'You are trespassing and going beyond limits');
+            return redirect()->back();
+        }
+        $services = ServiceType::orderBy('type', 'asc')->get();
+        return view('admin.services.option.create', ['services' => $services]);
+    }
+
     public function pre_calender(){
         $access = $this->access();
         if($access == 'no access'){
@@ -191,6 +201,38 @@ class ServiceController extends Controller
         return view('admin.analytics.viewMonthly', ['attendance' => $attendance, 'dates' => $dates, 'days' => $days, 'month' => $month, 'year' => $year]);
     }
 
+    public function servicenoteform(){
+        return view('admin.analytics.getServiceNotes');
+    }
+
+    public function servicenotelist(Request $request){
+        $request->validate([
+            'day' => 'required'
+        ]);
+
+        $date = Carbon::parse($request->day);
+        $monthName = $date->format('F');
+        $day = $date->format('l');
+        $year = $date->format('Y');
+
+        $notesall = ServiceNote::where([
+            'month' => $monthName,
+            'year' => $year
+        ])->get();
+
+        $notes = array();
+
+        foreach($notesall as $item){
+            $today = $date->format('Y-m-d');
+            $queriedDate = Carbon::parse($item->created_at)->format('Y-m-d');
+            if($today == $queriedDate){
+                $notes[] = $item;
+            }
+        }
+
+        return view('admin.analytics.serviceNotesLog', ['notes' => $notes]);
+    }
+
     public function todayServiceNotes()
     {
         $date = Carbon::now();
@@ -198,19 +240,26 @@ class ServiceController extends Controller
         $day = $date->format('l');
         $year = $date->format('Y');
 
-        $notes = ServiceNote::where(
-            [
-                'day' => $day,
-                'month' => $monthName,
-                'year' => $year
-            ]
-        )->get();
+        $notesall = ServiceNote::where([
+            'month' => $monthName,
+            'year' => $year
+        ])->get();
+
+        $notes = array();
+
+        foreach($notesall as $item){
+            $today = $date->format('Y-m-d');
+            $queriedDate = Carbon::parse($item->created_at)->format('Y-m-d');
+            if($today == $queriedDate){
+                $notes[] = $item;
+            }
+        }
 
         return view('admin.analytics.serviceNotesLog', ['notes' => $notes]);
     }
 
     public function servicenote(Request $request){
-        $note = ServiceNote::where('id', $request->id)->first();
+        $note = ServiceNote::where('id', $request->vim)->first();
         return view('admin.analytics.singleServiceNote', ['note' => $note]);
     }
 }

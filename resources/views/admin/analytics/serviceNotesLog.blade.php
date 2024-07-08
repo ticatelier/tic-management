@@ -20,8 +20,8 @@
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
-                        <a href="{{ route('admin.service.option') }}"><button class="btn btn-info" data-bs-toggle="modal"
-                                data-bs-target="#add_trainer"> View Service Options</button></a>
+                        <a href="{{ route('admin.analytics.servicenote.form') }}"><button class="btn btn-info" data-bs-toggle="modal"
+                                data-bs-target="#add_trainer"> Service Notes</button></a>
                     </div>
                 </div>
             </div>
@@ -99,8 +99,9 @@
                                                                     <td>{{ $note->created_at }}</td>
 
                                                                     <td class="text-end">
-                                                                        <form action="{{ route('admin.analytics.servicenote') }}">
-                                                                            <input type="text" name="id" value="{{ $note->id }}" hidden>
+                                                                        <form action="{{ route('admin.analytics.servicenote') }}" method="GET">
+                                                                            @csrf
+                                                                            <input type="text" name="vim" value="{{ $note->id }}" hidden>
                                                                             <button class="dropdown-item" href="#">View Service Note</button>
                                                                         </form>
                                                                     </td>

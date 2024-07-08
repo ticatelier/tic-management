@@ -19,54 +19,57 @@
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
-                        <a href="{{ route('admin.service.option') }}"><button class="btn btn-info" data-bs-toggle="modal"
-                                data-bs-target="#add_trainer"> View Service Options</button></a>
+                        <a href="{{ route('admin.analytics.servicenote.form') }}"><button class="btn btn-info" data-bs-toggle="modal"
+                                data-bs-target="#add_trainer"> Service Note</button></a>
                     </div>
                 </div>
             </div>
 
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title mb-0">Service Note</h4>
-                            <h5>{{ $note->day }} {{ $note->month }}, {{ $note->year }}</h5>
+                    <div class="card p-2 border border-secondary border-3">
+                        <div class="card-header text-center">
+                            <div class="row justify-content-center">
+                                <img src="{{ asset('assets/img/logo2.jpg')}}" alt="Logo" style="width: 230px">
+                            </div>
+                            <h4 class="card-title mb-0">DAILY SERVICE LOG</h4>
+                            <h5>{{ $note->day }} {{ Carbon\Carbon::parse($note->created_at)->format('d') }} {{ $note->month }}, {{ $note->year }}</h5>
                         </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-4 p-2 text-right">
-                                    <h5>Participant</h5>
+                        <div class="card-body" style="padding: 14px 6px;">
+                            <div class="row border mb-2 border-secondary" style="padding: 14px 6px;">
+                                <div class="col-4 p-2 text-right border border-secondary" style="padding: 14px 6px;">
+                                    <h4>Participant</h4>
                                     <p>{{ $note->client->name }}</p>
                                 </div>
-                                <div class="col-4 p-2 text-right">
-                                    <h5>DSP Trainer</h5>
+                                <div class="col-4 p-2 text-right border border-secondary" style="padding: 14px 6px;">
+                                    <h4>DSP Trainer</h4>
                                     <p>{{ $note->trainer->name }}</p>
                                 </div>
-                                <div class="col-4 p-2 text-right">
-                                    <h5>Hours Per Month</h5>
+                                <div class="col-4 p-2 text-right border border-secondary" style="padding: 14px 6px;">
+                                    <h4>Hours Per Month</h4>
                                     <p></p>
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-3 p-2 text-right">
-                                    <h5>Time in:</h5>
+                            <div class="row mb-2 border border-secondary" style="padding: 14px 6px;">
+                                <div class="col-3 p-2 text-right border border-secondary" style="padding: 14px 6px;">
+                                    <h4>Time in:</h4>
                                     <p>{{ $note->timein }}</p>
                                 </div>
-                                <div class="col-3 p-2 text-right">
-                                    <h5>Time out:</h5>
+                                <div class="col-3 p-2 text-right border border-secondary" style="padding: 14px 6px;">
+                                    <h4>Time out:</h4>
                                     <p>{{ $note->timeout }}</p>
                                 </div>
-                                <div class="col-3 p-2 text-right">
-                                    <h5>Daily Hours:</h5>
+                                <div class="col-3 p-2 text-right border border-secondary" style="padding: 14px 6px;">
+                                    <h4>Daily Hours:</h4>
                                     <p>{{ $note->daily_hour }}</p>
                                 </div>
-                                <div class="col-3 p-2 text-right">
-                                    <h5>Location:</h5>
+                                <div class="col-3 p-2 text-right border border-secondary" style="padding: 14px 6px;">
+                                    <h4>Location:</h4>
                                     <p>{{ $note->Location }}</p>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row mb-2 border border-secondary" style="padding: 14px 6px;">
                                 @php
                                     $categories = json_decode($note->categories);
                                 @endphp
@@ -85,7 +88,7 @@
                                 @endforeach
                             </div>
 
-                            <div class="row">
+                            <div class="row mb-2 border border-secondary" style="padding: 14px 6px;">
                                 <div class="col-md-12">
                                     <div class="checkbox">
                                         <label class="col-form-label">
@@ -93,23 +96,23 @@
                                                 type="checkbox"
                                                 {{ $note->medadmin == "As Directed" ? 'checked':'' }}
                                             />
-                                            All Medications Administered as directed
+                                            <span class="h4"> Medications Administered as directed</span>
                                         </label>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row mb-2 border border-secondary" style="padding: 14px 6px;">
                                 <h4>Medication Changes</h4>
                                 <p>{{ $note->medchanges }}</p>
                             </div>
 
-                            <div class="row">
+                            <div class="row mb-2 border border-secondary" style="padding: 14px 6px;">
                                 <h4>Behaviour Problems</h4>
                                 <p>{{ $note->behaviour }}</p>
                             </div>
 
-                            <div class="row">
+                            <div class="row mb-2 border border-secondary" style="padding: 14px 6px;">
                                 <h4>Activities and Staff Communication</h4>
                                 <p>{{ $note->activities }}</p>
                             </div>

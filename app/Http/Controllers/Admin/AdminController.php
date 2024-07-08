@@ -53,6 +53,7 @@ class AdminController extends Controller
         }
         $request->validate([
             'email' => 'unique:users|required',
+            'name' => 'required'
         ]);
 
         $user = User::create([
@@ -66,6 +67,17 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
+    public function edit(Request $request)
+    {
+        $access = $this->access();
+        if($access == 'no access'){
+            Alert::error('Access Denied', 'You are trespassing and going beyond limits');
+            return redirect()->back();
+        }
+        $user = User::where('id', $request->vim)->first();
+        return view('admin.administrators.edit', ['user' => $user]);
+    }
+
     public function update(Request $request)
     {
         $access = $this->access();
@@ -73,6 +85,19 @@ class AdminController extends Controller
             Alert::error('Access Denied', 'You are trespassing and going beyond limits');
             return redirect()->back();
         }
+        $request->validate([
+            'email' => 'required',
+            'name' => 'required'
+        ]);
+
+        User::where('id', $request->id)
+            ->update([
+                'email' => $request->email,
+                'name' => $request->name
+        ]);
+
+        Alert::success('Successful', $request->name.' has be registered successfully');
+        return redirect()->intended(route('admin.administrators.index'));
     }
 
     public function destroy(Request $request)
@@ -82,5 +107,9 @@ class AdminController extends Controller
             Alert::error('Access Denied', 'You are trespassing and going beyond limits');
             return redirect()->back();
         }
+        $id = $request->vim;
+        User::find(id)->delete();
+        Alert::success('Deleted', 'Deleted Successfully');
+        return redirect()->back();
     }
 }

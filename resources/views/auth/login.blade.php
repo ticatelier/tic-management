@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg"
-    data-sidebar-image="none">
+<html lang="en" data-layout="horizontal" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-layout-mode="orange" data-layout-width="fluid" data-layout-position="fixed" data-layout-style="default" data-select2-id="37">
 
 <head>
     <meta charset="utf-8">
@@ -9,7 +8,7 @@
     <meta name="keywords"
         content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
     <meta name="author" content="Dreamstechnologies - Bootstrap Admin Template">
-    <title>Login - HRMS admin template</title>
+    <title>Login</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/logo2.jpg')}}">
 
@@ -52,7 +51,7 @@
                             @csrf
                             <div class="input-block mb-4">
                                 <label class="col-form-label">Email Address</label>
-                                <input name="email" class="form-control" type="text" value="admin@dreamstechnologies.com">
+                                <input name="email" class="form-control" type="text">
                             </div>
                             <div class="input-block mb-4">
                                 <div class="row align-items-center">
@@ -60,22 +59,20 @@
                                         <label class="col-form-label">Password</label>
                                     </div>
                                     <div class="col-auto">
-                                        <a class="text-muted" href="forgot-password.html">
+                                        <a class="text-muted" href="">
                                             Forgot password?
                                         </a>
                                     </div>
                                 </div>
                                 <div class="position-relative">
-                                    <input name="password" class="form-control" type="password" value="123456" id="password">
+                                    <input name="password" class="form-control" type="password"s id="password">
                                     <span class="fa-solid fa-eye-slash" id="toggle-password"></span>
                                 </div>
                             </div>
                             <div class="input-block mb-4 text-center">
                                 <button class="btn btn-primary account-btn" type="submit">Login</button>
                             </div>
-                            <div class="account-footer">
-                                <p>Don't have an account yet? <a href="register.html">Register</a></p>
-                            </div>
+
                         </form>
 
                     </div>

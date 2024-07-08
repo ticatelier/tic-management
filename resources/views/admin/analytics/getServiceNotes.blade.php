@@ -12,15 +12,15 @@
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="page-title">Users</h3>
+                        <h3 class="page-title">Get Service Notes</h3>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Users</li>
+                            <li class="breadcrumb-item active">Get Service Notes</li>
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
-                        <a href="{{ route('admin.users.index') }}"><button class="btn btn-info" data-bs-toggle="modal"
-                                data-bs-target="#add_trainer"> View Users</button></a>
+                        <a href="{{ route('dashboard') }}"><button class="btn btn-info" data-bs-toggle="modal"
+                                data-bs-target="#add_trainer"> Dashboard</button></a>
                     </div>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title mb-0">Add Users</h4>
+                            <h4 class="card-title mb-0">Service Note</h4>
                         </div>
                         <div class="card-body">
                             @if($errors)
@@ -37,44 +37,18 @@
                                     <div class="alert alert-danger">{{ $error }}</div>
                                 @endforeach
                             @endif
-                            <form method="POST" action="{{ route('admin.users.update') }}">
+                            <form method="GET" action="{{ route('admin.analytics.servicenote.list') }}">
                                 @csrf
                                 <div class="input-block mb-3 row">
-                                    <label class="col-form-label col-md-2">Name</label>
+                                    <label class="col-form-label col-md-2">Select Date</label>
                                     <div class="col-md-10">
-                                        <input name="name" value="{{ $user->name }}" type="text" class="form-control">
+                                        <input name="day" type="date" class="form-control">
                                     </div>
                                 </div>
 
-                                <div class="input-block mb-3 row">
-                                    <label class="col-form-label col-md-2">Email</label>
-                                    <div class="col-md-10">
-                                        <input name="email" value="{{ $user->email }}" type="email" class="form-control" required>
-                                    </div>
-                                </div>
-
-                                <div class="input-block mb-3 row">
-                                    <label class="col-form-label col-md-2">Service Option</label>
-                                    <div class="col-md-10">
-                                        <select name="service" class="form-control form-select">
-                                            <option value="" selected disabled>-Select Service Option</option>
-                                            @foreach ($all as $service)
-                                                <option value="" disabled>---- {{ $service->type }} ----</option>
-                                                @php
-                                                    $collection = $service->options
-                                                @endphp
-                                                @foreach ($collection as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->option }}</option>
-                                                @endforeach
-                                            @endforeach
-
-                                        </select>
-                                    </div>
-                                </div>
 
                                 <div class="col-auto float-end ms-auto">
-                                    <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#add_trainer"><i
-                                            class="fa-solid fa-plus"></i> Save Changes</button>
+                                    <button type="submit" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#add_trainer"> View Service Notes</button>
                                 </div>
                                 {{-- <div class="input-block mb-3 row">
                                     <label class="col-form-label col-md-2">Password</label>
