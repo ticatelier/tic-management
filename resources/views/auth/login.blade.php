@@ -65,7 +65,7 @@
                                     </div>
                                 </div>
                                 <div class="position-relative">
-                                    <input name="password" class="form-control" type="password"s id="password">
+                                    <input name="password" class="form-control" type="password" id="password">
                                     <span class="fa-solid fa-eye-slash" id="toggle-password"></span>
                                 </div>
                             </div>

@@ -53,6 +53,13 @@ class ServiceNoteController extends Controller
             'categories' => 'required'
         ]);
 
+        // check the subscription
+        $status = ClientSubscription::where('user_id', $request->client)->first()->status;
+        if($status == 'unactive'){
+            Alert::error('Error', 'No active subscription for selected client');
+            return redirect()->back();
+        }
+
         $start = Carbon::parse($request->timein);
         $end = Carbon::parse($request->timeout);
         $hours = $start->diffInHours($end);
