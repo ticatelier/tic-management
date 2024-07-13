@@ -103,7 +103,7 @@
                             <span class="notification-title">Notifications</span>
                             <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
                         </div>
-                        <div class="noti-content">
+                        {{-- <div class="noti-content">
                             <ul class="notification-list">
                                 <li class="notification-message">
                                     <a href="activities.html">
@@ -190,7 +190,7 @@
                         </div>
                         <div class="topnav-dropdown-footer">
                             <a href="activities.html">View all Notifications</a>
-                        </div>
+                        </div> --}}
                     </div>
                 </li>
 
@@ -204,7 +204,7 @@
                             <span class="notification-title">Messages</span>
                             <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
                         </div>
-                        <div class="noti-content">
+                        {{-- <div class="noti-content">
                             <ul class="notification-list">
                                 <li class="notification-message">
                                     <a href="chat.html">
@@ -300,7 +300,7 @@
                         </div>
                         <div class="topnav-dropdown-footer">
                             <a href="chat.html">View all Messages</a>
-                        </div>
+                        </div> --}}
                     </div>
                 </li>
 
@@ -311,8 +311,8 @@
                         <span>Trainer</span>
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="profile.html">My Profile</a>
-                        <a class="dropdown-item" href="settings.html">Settings</a>
+                        <a class="dropdown-item" href="#">My Profile</a>
+                        <a class="dropdown-item" href="#">Settings</a>
                         <form method="POST" action="/logout">
                             @csrf
                             <button type="submit" class="dropdown-item">Logout</button>
@@ -326,8 +326,8 @@
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
                         class="fa-solid fa-ellipsis-vertical"></i></a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="profile.html">My Profile</a>
-                    <a class="dropdown-item" href="settings.html">Settings</a>
+                    <a class="dropdown-item" href="#">My Profile</a>
+                    <a class="dropdown-item" href="#">Settings</a>
                     <form method="POST" action="/logout">
                         @csrf
                         <button type="submit" class="dropdown-item">Logout</button>
