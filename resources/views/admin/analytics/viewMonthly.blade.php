@@ -71,11 +71,17 @@
                                                                 $i = 'full';
                                                                 $totalhours = $totalhours + $hour->daily_hour;
                                                             @endphp
-                                                            <td style="@if($day == 'Saturday' || $day == 'Sunday') background-color: lightblue; @endif text-align: center">{{ $hour->daily_hour }}
+                                                            <td style="@if($day == 'Saturday' || $day == 'Sunday') background-color: lightblue; @endif text-align: center">
+                                                                {{ $hour->daily_hour }}
                                                                 <br>
                                                                 <small style="color: blue">
                                                                     {{ $hour->trainer->name }}
                                                                 </small>
+                                                                <form action="{{ route('admin.analytics.servicenote') }}" method="GET">
+                                                                    @csrf
+                                                                    <input type="text" name="vim" value="{{ $hour->id }}" hidden>
+                                                                    <button class="dropdown-item" href="#">View Service Note</button>
+                                                                </form>
                                                             </td>
                                                         @else
 

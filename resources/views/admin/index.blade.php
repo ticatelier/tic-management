@@ -30,7 +30,7 @@
                                     $clients = DB::table('users')->where('role', 'user')->count();
                                 @endphp
                                 <h3>{{ $clients }}</h3>
-                                <span>Users</span>
+                                <span>Participants</span>
                             </div>
                         </div>
                     </div>
@@ -324,7 +324,7 @@
                 <div class="col-md-6 d-flex">
                     <div class="card card-table flex-fill">
                         <div class="card-header">
-                            <h3 class="card-title mb-0">User's Subscriptions</h3>
+                            <h3 class="card-title mb-0">Participant's Subscriptions</h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -347,7 +347,7 @@
                                                 <td>
                                                     <h2><a href="#">{{ $item->user->name }}</a></h2>
                                                 </td>
-                                                <td>{{ $item->duedate }}</td>
+                                                <td>{{ Carbon\Carbon::parse($item->duedate)->format('m-d-Y') }}</td>
                                                 <td>
                                                     <span class="badge @if($item->status == 'active')bg-inverse-success @else bg-inverse-danger @endif">{{ $item->status }}</span>
                                                 </td>
@@ -408,7 +408,7 @@
                 <div class="col-md-6 d-flex">
                     <div class="card card-table flex-fill">
                         <div class="card-header">
-                            <h3 class="card-title mb-0">Clients</h3>
+                            <h3 class="card-title mb-0">Participants</h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -489,7 +489,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <a href="{{ route('admin.users.index') }}">View all clients</a>
+                            <a href="{{ route('admin.users.index') }}">View all participants</a>
                         </div>
                     </div>
                 </div>

@@ -15,12 +15,17 @@ use Illuminate\Support\Facades\Auth;
 
 class ServiceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view service note', ['only' => ['servicenote']]);
+        $this->middleware('permission:create monthly attendance', ['only' => ['calender']]);
+    }
     private function access(){
         $role = User::find(Auth::id())->role;
         if($role == 'superadmin')
         {
             return 'access';
-        }elseif($role == 'superadmin'){
+        }elseif($role == 'admin'){
             return 'access';
         }
         else{

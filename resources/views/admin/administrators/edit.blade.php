@@ -39,6 +39,7 @@
                             @endif
                             <form method="POST" action="{{ route('admin.administrators.update') }}">
                                 @csrf
+                                <input type="text" name="id" value="{{ $user->id }}" hidden>
                                 <div class="input-block mb-3 row">
                                     <label class="col-form-label col-md-2">Name</label>
                                     <div class="col-md-10">

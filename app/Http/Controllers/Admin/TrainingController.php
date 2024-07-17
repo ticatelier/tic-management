@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Detail;
 use App\Models\AssignTrainer;
 use Illuminate\Support\Facades\Hash;
 use Alert;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeMail;
 
 class TrainingController extends Controller
 {
@@ -17,7 +20,7 @@ class TrainingController extends Controller
         if($role == 'superadmin')
         {
             return 'access';
-        }elseif($role == 'superadmin'){
+        }elseif($role == 'admin'){
             return 'access';
         }
         else{
@@ -62,6 +65,15 @@ class TrainingController extends Controller
             'password' => Hash::make('user123'),
             'role' => 'trainer'
         ]);
+
+        Detail::create([
+            'user_id' => $user->id
+        ]);
+
+        Mail::to($user->email)->send(new WelcomeMail([
+            'name' => $user->name,
+            'role' => $user->role
+        ]));
 
         Alert::success('Successful', $request->name.' has be registered successfully');
         return redirect()->back();
@@ -108,7 +120,7 @@ class TrainingController extends Controller
             return redirect()->back();
         }
         $id = $request->vim;
-        User::find(id)->delete();
+        User::find($id)->delete();
         Alert::success('Deleted', 'Deleted Successfully');
         return redirect()->back();
     }

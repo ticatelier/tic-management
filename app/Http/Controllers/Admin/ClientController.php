@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Detail;
 use App\Models\ServiceType;
 use App\Models\ClientSubscription;
 use Illuminate\Support\Facades\Hash;
@@ -14,12 +15,22 @@ use Carbon\Carbon;
 
 class ClientController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view user', ['only' => ['index']]);
+        $this->middleware('permission:create user', ['only' => ['create','store']]);
+        $this->middleware('permission:update user', ['only' => ['update','edit']]);
+        $this->middleware('permission:delete user', ['only' => ['destroy']]);
+        $this->middleware('permission:view pos number', ['only' => ['subscription', 'expiringPOS']]);
+        $this->middleware('permission:create pos number', ['only' => ['addsubcription','storesubscription']]);
+    }
+
     private function access(){
         $role = User::find(Auth::id())->role;
         if($role == 'superadmin')
         {
             return 'access';
-        }elseif($role == 'superadmin'){
+        }elseif($role == 'admin'){
             return 'access';
         }
         else{
@@ -56,7 +67,6 @@ class ClientController extends Controller
             return redirect()->back();
         }
         $request->validate([
-            'email' => 'unique:users|required',
             'name' => 'required',
             'service' => 'required',
         ]);
@@ -71,6 +81,10 @@ class ClientController extends Controller
         ClientSubscription::create([
             'user_id' => $user->id,
             'service_option_id' => $request->service
+        ]);
+
+        Detail::create([
+            'user_id' => $user->id
         ]);
 
         Alert::success('Successful', $request->name.' has be registered successfully');
@@ -99,7 +113,6 @@ class ClientController extends Controller
         }
 
         $request->validate([
-            'email' => 'required',
             'name' => 'required',
             'service' => 'required',
         ]);
@@ -127,7 +140,7 @@ class ClientController extends Controller
             return redirect()->back();
         }
         $id = $request->vim;
-        User::find(id)->delete();
+        User::find($id)->delete();
         Alert::success('Deleted', 'Deleted Successfully');
         return redirect()->back();
     }
@@ -159,7 +172,7 @@ class ClientController extends Controller
             return redirect()->back();
         }
         $request->validate([
-            'posnumber' => 'unique:client_subscriptions|required',
+            'posnumber' => 'unique:client_subscriptions|required|regex:/^(\d{8})$/',
             'user' => 'required',
             'startdate' => 'required',
             'duedate' => 'required',

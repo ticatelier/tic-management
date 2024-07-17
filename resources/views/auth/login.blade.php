@@ -33,7 +33,7 @@
             <div class="container">
 
                 <div class="account-logo">
-                    <a href="admin-dashboard.html"><img src="{{ asset('assets/img/logo2.jpg')}}" alt="Dreamguy's Technologies" style="width: 150px"></a>
+                    <a href=""><img src="{{ asset('assets/img/logo2.jpg')}}" alt="Dreamguy's Technologies" style="width: 150px"></a>
                 </div>
 
                 <div class="account-box">
@@ -59,7 +59,7 @@
                                         <label class="col-form-label">Password</label>
                                     </div>
                                     <div class="col-auto">
-                                        <a class="text-muted" href="">
+                                        <a class="text-muted" href="{{ route('password.request') }}">
                                             Forgot password?
                                         </a>
                                     </div>

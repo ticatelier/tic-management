@@ -13,10 +13,10 @@
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="page-title">Users Subscriptions</h3>
+                        <h3 class="page-title">Participants Subscriptions</h3>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Users Subscriptions</li>
+                            <li class="breadcrumb-item active">Participants Subscriptions</li>
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
@@ -56,7 +56,7 @@
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
                                                     rowspan="1" colspan="1"
                                                     aria-label="Name : activate to sort column ascending"
-                                                    style="width: 140.922px;">Client Name </th>
+                                                    style="width: 140.922px;">Participant Name </th>
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
                                                     rowspan="1" colspan="1"
                                                     aria-label="Pos Number : activate to sort column ascending"
@@ -95,8 +95,8 @@
                                                         </h2>
                                                     </td>
                                                     <td>{{ $user->posnumber }}</td>
-                                                    <td>{{ $user->startdate }}</td>
-                                                    <td>{{ $user->duedate }}</td>
+                                                    <td>{{ Carbon\Carbon::parse($user->startdate)->format("m-d-Y") }}</td>
+                                                    <td>{{ Carbon\Carbon::parse($user->duedate)->format('m-d-Y') }}</td>
                                                     <td>
                                                         <div class="dropdown action-label">
                                                             <a class="btn btn-white btn-sm btn-rounded dropdown-toggle"
@@ -109,9 +109,7 @@
                                                                 <a class="dropdown-item" href="#"><i
                                                                         class="fa-regular fa-circle-dot text-success"></i>
                                                                     Active</a>
-                                                                <a class="dropdown-item" href="#"><i
-                                                                        class="fa-regular fa-circle-dot text-danger"></i>
-                                                                    Inactive</a>
+
                                                             </div>
                                                         </div>
                                                     </td>

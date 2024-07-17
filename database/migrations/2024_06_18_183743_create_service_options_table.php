@@ -16,8 +16,8 @@ return new class extends Migration
             $table->bigInteger('service_type_id')->unsigned();
             $table->foreign('service_type_id')->references('id')->on('service_types')->onDelete('cascade');
             $table->string('option', 100)->nullable()->default('text');
-            $table->integer('hours')->nullable()->default(12);
-            $table->bigInteger('rate')->nullable()->default(12);
+            $table->integer('hours')->nullable();
+            $table->float('rate')->nullable();
             $table->timestamps();
         });
     }

@@ -12,15 +12,15 @@
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="page-title">Users</h3>
+                        <h3 class="page-title">Participants</h3>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Users</li>
+                            <li class="breadcrumb-item active">Participants</li>
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
                         <a href="{{ route('admin.users.index') }}"><button class="btn btn-info" data-bs-toggle="modal"
-                                data-bs-target="#add_trainer"> View Users</button></a>
+                                data-bs-target="#add_trainer"> View Participants</button></a>
                     </div>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title mb-0">Add Users</h4>
+                            <h4 class="card-title mb-0">Edit Participant</h4>
                         </div>
                         <div class="card-body">
                             @if($errors)
@@ -49,7 +49,7 @@
                                 <div class="input-block mb-3 row">
                                     <label class="col-form-label col-md-2">Email</label>
                                     <div class="col-md-10">
-                                        <input name="email" value="{{ $user->email }}" type="email" class="form-control" required>
+                                        <input name="email" value="{{ $user->email }}" type="email" class="form-control">
                                     </div>
                                 </div>
 

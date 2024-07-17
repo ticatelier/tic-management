@@ -1,25 +1,80 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+<!DOCTYPE html>
+<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg"
+    data-sidebar-image="none">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Smarthr - Bootstrap Admin Template">
+    <meta name="keywords"
+        content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
+    <meta name="author" content="Dreamstechnologies - Bootstrap Admin Template">
+    <title>Forgot Password</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/logo2.jpg')}}">
+
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css')}}">
+
+    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/fontawesome.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/all.min.css')}}">
+
+    <link rel="stylesheet" href="{{ asset('assets/css/line-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/material.css')}}">
+
+    <link rel="stylesheet" href="{{ asset('assets/css/line-awesome.min.css')}}">
+
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
+</head>
+
+<body class="account-page">
+
+    <div class="main-wrapper">
+        <div class="account-content">
+            <div class="container">
+
+                <div class="account-logo">
+                    <a href=""><img src="{{ asset('assets/img/logo2.jpg')}}" alt="Dreamguy's Technologies" style="width: 150px"></a>
+                </div>
+
+                <div class="account-box">
+                    <div class="account-wrapper">
+                        <h3 class="account-title">Forgot Password?</h3>
+                        <p class="account-subtitle">Enter your email to get a password reset link</p>
+
+                        @if($errors)
+                            @foreach ($errors->all() as $error)
+                                <div class="alert alert-danger">{{ $error }}</div>
+                            @endforeach
+                        @endif
+
+                        <form method="POST" action="{{ route('password.email') }}">
+                            @csrf
+                            <div class="input-block mb-4">
+                                <label class="col-form-label">Email Address</label>
+                                <input class="form-control" name="email" type="text">
+                            </div>
+                            <div class="input-block mb-4 text-center">
+                                <button class="btn btn-primary account-btn" type="submit">Reset Password</button>
+                            </div>
+                            <div class="account-footer">
+                                <p>Remember your password? <a href="/">Login</a></p>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('password.email') }}">
-        @csrf
+    <script src="assets/js/jquery-3.7.1.min.js" type="bf3c64e9068c363a41a99102-text/javascript"></script>
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+    <script src="assets/js/bootstrap.bundle.min.js" type="bf3c64e9068c363a41a99102-text/javascript"></script>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    <script src="assets/js/app.js" type="bf3c64e9068c363a41a99102-text/javascript"></script>
+    <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+        data-cf-settings="bf3c64e9068c363a41a99102-|49" defer></script>
+</body>
+
+</html>

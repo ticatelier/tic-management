@@ -5,18 +5,31 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Detail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Alert;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeMail;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:view admin', ['only' => ['index']]);
+        $this->middleware('permission:create admin', ['only' => ['create','store']]);
+        $this->middleware('permission:update admin', ['only' => ['update','edit']]);
+        $this->middleware('permission:delete admin', ['only' => ['destroy']]);
+    }
+
     private function access(){
         $role = User::find(Auth::id())->first()->role;
         if($role == 'superadmin')
         {
             return 'access';
-        }elseif($role == 'superadmin'){
+        }elseif($role == 'admin'){
             return 'access';
         }
         else{
@@ -63,6 +76,18 @@ class AdminController extends Controller
             'role' => 'admin'
         ]);
 
+        Detail::create([
+            'user_id' => $user->id
+        ]);
+
+        $adminRole = Role::where(['name' => 'admin'])->first();
+        $user->assignRole($adminRole);
+
+        Mail::to($user->email)->send(new WelcomeMail([
+            'name' => $user->name,
+            'role' => $user->role
+        ]));
+
         Alert::success('Successful', $request->name.' has be registered successfully');
         return redirect()->back();
     }
@@ -108,7 +133,7 @@ class AdminController extends Controller
             return redirect()->back();
         }
         $id = $request->vim;
-        User::find(id)->delete();
+        User::find($id)->delete();
         Alert::success('Deleted', 'Deleted Successfully');
         return redirect()->back();
     }

@@ -18,15 +18,15 @@
                     </li>
 
                     <li class="menu-title">
-                        <span>Users</span>
+                        <span>Participants</span>
                     </li>
                     <li class="submenu">
-                        <a href="#" class="noti-dot"><i class="la la-user"></i> <span> Users</span> <span
+                        <a href="#" class="noti-dot"><i class="la la-user"></i> <span> Participants</span> <span
                                 class="menu-arrow"></span></a>
                         <ul>
-                            <li><a href="{{ route('admin.users.index') }}">All Users</a></li>
-                            <li><a href="{{ route('admin.users.create') }}">Add User</a></li>
-                            <li><a href="{{ route('admin.users.subscription') }}">Users Subcriptions</a></li>
+                            <li><a href="{{ route('admin.users.index') }}">All Participants</a></li>
+                            <li><a href="{{ route('admin.users.create') }}">Add Participant</a></li>
+                            <li><a href="{{ route('admin.users.subscription') }}">Participants Subcriptions</a></li>
                             <li><a href="{{ route('admin.users.expiring') }}">Expiring POS number</a></li>
                         </ul>
                     </li>
@@ -89,15 +89,15 @@
                 </li>
 
                 <li class="menu-title">
-                    <span>Users</span>
+                    <span>Participants</span>
                 </li>
                 <li class="submenu">
-                    <a href="#" class="noti-dot"><i class="la la-user"></i> <span> Users</span> <span
+                    <a href="#" class="noti-dot"><i class="la la-user"></i> <span> Participants</span> <span
                             class="menu-arrow"></span></a>
                     <ul>
-                        <li><a href="{{ route('admin.users.index') }}">All Users</a></li>
-                        <li><a href="{{ route('admin.users.create') }}">Add User</a></li>
-                        <li><a href="{{ route('admin.users.subscription') }}">Users Subcriptions</a></li>
+                        <li><a href="{{ route('admin.users.index') }}">All Participants</a></li>
+                        <li><a href="{{ route('admin.users.create') }}">Add Participant</a></li>
+                        <li><a href="{{ route('admin.users.subscription') }}">Participants Subcriptions</a></li>
                         <li><a href="{{ route('admin.users.expiring') }}">Expiring POS number</a></li>
                     </ul>
                 </li>

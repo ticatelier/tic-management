@@ -13,10 +13,10 @@
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="page-title">Users</h3>
+                        <h3 class="page-title">Participants</h3>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Users</li>
+                            <li class="breadcrumb-item active">Participants</li>
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
@@ -57,10 +57,10 @@
                                                     rowspan="1" colspan="1"
                                                     aria-label="Name : activate to sort column ascending"
                                                     style="width: 140.922px;">Name </th>
-                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
+                                                {{-- <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
                                                     rowspan="1" colspan="1"
                                                     aria-label="Contact Number : activate to sort column ascending"
-                                                    style="width: 115.406px;">Contact Number </th>
+                                                    style="width: 115.406px;">Contact Number </th> --}}
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
                                                     rowspan="1" colspan="1"
                                                     aria-label="Email : activate to sort column ascending"
@@ -94,7 +94,7 @@
                                                             <a href="">{{ $user->name }} </a>
                                                         </h2>
                                                     </td>
-                                                    <td></td>
+                                                    {{-- <td></td> --}}
                                                     <td>{{ $user->email }}</td>
                                                     <td>{{ $user->subscription->service->option }}</td>
                                                     <td>
@@ -102,15 +102,14 @@
                                                             <a class="btn btn-white btn-sm btn-rounded dropdown-toggle"
                                                                 href="#" data-bs-toggle="dropdown"
                                                                 aria-expanded="false">
-                                                                <i class="fa-regular fa-circle-dot text-danger"></i> Inactive
-                                                            </a>
+                                                                <i
+                                                                        class="fa-regular fa-circle-dot text-success"></i>
+                                                                    Active</a>
                                                             <div class="dropdown-menu">
                                                                 <a class="dropdown-item" href="#"><i
                                                                         class="fa-regular fa-circle-dot text-success"></i>
                                                                     Active</a>
-                                                                <a class="dropdown-item" href="#"><i
-                                                                        class="fa-regular fa-circle-dot text-danger"></i>
-                                                                    Inactive</a>
+
                                                             </div>
                                                         </div>
                                                     </td>

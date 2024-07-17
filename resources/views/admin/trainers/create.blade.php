@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-auto float-end ms-auto">
                         <a href="{{ route('admin.trainer.index') }}"><button class="btn btn-info" data-bs-toggle="modal"
-                                data-bs-target="#add_trainer"> Add Trainers</button></a>
+                                data-bs-target="#add_trainer"> View Trainers</button></a>
                     </div>
                 </div>
             </div>

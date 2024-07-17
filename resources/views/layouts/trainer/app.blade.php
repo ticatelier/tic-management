@@ -96,7 +96,7 @@
 
                 <li class="nav-item dropdown">
                     <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-                        <i class="fa-regular fa-bell"></i> <span class="badge rounded-pill">3</span>
+                        <i class="fa-regular fa-bell"></i> <span class="badge rounded-pill"></span>
                     </a>
                     <div class="dropdown-menu notifications">
                         <div class="topnav-dropdown-header">
@@ -197,7 +197,7 @@
 
                 <li class="nav-item dropdown">
                     <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-                        <i class="fa-regular fa-comment"></i><span class="badge rounded-pill">8</span>
+                        <i class="fa-regular fa-comment"></i><span class="badge rounded-pill"></span>
                     </a>
                     <div class="dropdown-menu notifications">
                         <div class="topnav-dropdown-header">

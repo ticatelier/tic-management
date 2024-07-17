@@ -93,23 +93,22 @@
                                                             <a href="">{{ $user->name }} </a>
                                                         </h2>
                                                     </td>
-                                                    <td>9876543210</td>
+                                                    <td>{{ $user->detail->phone }}</td>
                                                     <td>{{ $user->email }}</td>
                                                     <td>
                                                         <div class="dropdown action-label">
                                                             <a class="btn btn-white btn-sm btn-rounded dropdown-toggle"
                                                                 href="#" data-bs-toggle="dropdown"
                                                                 aria-expanded="false">
-                                                                <i class="fa-regular fa-circle-dot text-danger"></i>
-                                                                Inactive
+                                                                <i
+                                                                        class="fa-regular fa-circle-dot text-success"></i>
+                                                                    Active
                                                             </a>
                                                             <div class="dropdown-menu">
                                                                 <a class="dropdown-item" href="#"><i
                                                                         class="fa-regular fa-circle-dot text-success"></i>
                                                                     Active</a>
-                                                                <a class="dropdown-item" href="#"><i
-                                                                        class="fa-regular fa-circle-dot text-danger"></i>
-                                                                    Inactive</a>
+
                                                             </div>
                                                         </div>
                                                     </td>
@@ -126,7 +125,7 @@
                                                                         data-bs-toggle="modal" data-bs-target="#edit_type"><i
                                                                             class="fa-solid fa-pencil m-r-5"></i> Edit</button>
                                                                 </form>
-                                                                <form action="{{ route('admin.trainer.destroy') }}">
+                                                                <form action="{{ route('admin.trainer.destroy') }}" method="POST">
                                                                     @csrf
                                                                     <input type="text" name="vim" value="{{ $user->id }}" hidden>
 

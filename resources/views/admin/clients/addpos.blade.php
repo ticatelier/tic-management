@@ -40,10 +40,10 @@
                             <form method="POST" action="{{ route('admin.users.subscription.store') }}">
                                 @csrf
                                 <div class="input-block mb-3 row">
-                                    <label class="col-form-label col-md-2">Client</label>
+                                    <label class="col-form-label col-md-2">Participant</label>
                                     <div class="col-md-10">
                                         <select name="user" class="form-control form-select">
-                                            <option value="" selected disabled>-Select User</option>
+                                            <option value="" selected disabled>-Select Participant</option>
                                             @foreach ($all as $sub)
                                                 <option value="{{ $sub->user_id }}">{{ $sub->user->name }} ({{ $sub->service->option }})</option>
                                             @endforeach

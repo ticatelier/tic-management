@@ -49,6 +49,11 @@ class User extends Authenticatable
         ];
     }
 
+    public function detail():HasOne
+    {
+        return $this->hasOne(Detail::class, 'user_id');
+    }
+
     public function client():HasMany
     {
         return $this->hasMany(AssignTrainer::class, 'client_id');

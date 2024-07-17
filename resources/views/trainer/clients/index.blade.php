@@ -91,7 +91,7 @@
                                                         </h2>
                                                     </td>
                                                     <td>{{ $user->client->email }}</td>
-                                                    <td>{{ $user->created_at }}</td>
+                                                    <td>{{ Carbon\Carbon::parse($user->created_at)->format('m-d-Y') }}</td>
                                                     <td>
                                                         <form method="GET" action="{{ route('trainer.services.note') }}">
                                                             @csrf

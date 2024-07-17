@@ -68,7 +68,7 @@
                                 <div class="input-block mb-3 row">
                                     <label class="col-form-label col-md-2">Rate</label>
                                     <div class="col-md-10">
-                                        <input name="rate" type="text" class="form-control">
+                                        <input name="rate" type="number" step="any" class="form-control">
                                     </div>
                                 </div>
 

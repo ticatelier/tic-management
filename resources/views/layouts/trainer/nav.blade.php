@@ -17,7 +17,7 @@
                     </li>
 
 
-                    <li class="menu-title">
+                    {{-- <li class="menu-title">
                         <span>Services</span>
                     </li>
                     <li class="submenu">
@@ -28,7 +28,7 @@
                             <li><a href="{{ route('admin.service.create') }}">Add Service</a></li>
                             <li><a href="{{ route('admin.service.option') }}">Service Options</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
 
 
                 </ul>
@@ -49,7 +49,7 @@
                 </li>
 
 
-                <li class="menu-title">
+                {{-- <li class="menu-title">
                     <span>Services</span>
                 </li>
                 <li class="submenu">
@@ -60,7 +60,7 @@
                         <li><a href="{{ route('admin.service.create') }}">Add Service</a></li>
                         <li><a href="{{ route('admin.service.option') }}">Service Options</a></li>
                     </ul>
-                </li>
+                </li> --}}
 
 
 
