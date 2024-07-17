@@ -68,13 +68,13 @@
     </div>
 
 
-    <script src="assets/js/jquery-3.7.1.min.js" type="bf3c64e9068c363a41a99102-text/javascript"></script>
+    <script src="{{ asset('assets/js/jquery-3.7.1.min.js')}}" type="text/javascript"></script>
 
-    <script src="assets/js/bootstrap.bundle.min.js" type="bf3c64e9068c363a41a99102-text/javascript"></script>
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js')}}" type="text/javascript"></script>
 
-    <script src="assets/js/app.js" type="bf3c64e9068c363a41a99102-text/javascript"></script>
-    <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
-        data-cf-settings="bf3c64e9068c363a41a99102-|49" defer></script>
+    <script src="{{ asset('assets/js/app.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js')}}"
+        data-cf-settings="b088b91653b1af364f2aee96-|49" defer></script>
 </body>
 
 </html>
