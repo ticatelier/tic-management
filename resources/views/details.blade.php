@@ -9,7 +9,7 @@
     <meta name="keywords"
         content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
     <meta name="author" content="Dreamstechnologies - Bootstrap Admin Template">
-    <title>Reset Password</title>
+    <title>Change Password</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/logo2.jpg')}}">
 
@@ -38,8 +38,8 @@
 
                 <div class="account-box">
                     <div class="account-wrapper">
-                        <h3 class="account-title">Reset Password</h3>
-                        <p class="account-subtitle">Enter your new password</p>
+                        <h3 class="account-title">Add Details and Change Password</h3>
+                        <p class="account-subtitle">Enter your details and change your password</p>
 
                         @if($errors)
                             @foreach ($errors->all() as $error)
@@ -47,15 +47,24 @@
                             @endforeach
                         @endif
 
-                        <form method="POST" action="{{ route('password.store') }}">
+                        <form method="POST" action="{{ route('details.store') }}">
                             @csrf
 
-                            <!-- Password Reset Token -->
-                            <input type="hidden" name="token" value="{{ $request->route('token') }}">
+                            <input type="hidden" name="id" value="{{ Illuminate\Support\Facades\Auth::id() }}">
 
                             <div class="input-block mb-4">
-                                <label class="col-form-label">Email Address</label>
-                                <input class="form-control" name="email" type="text" value="{{ $request->email }}" required>
+                                <label class="col-form-label">Address</label>
+                                <textarea name="address" rows="5" cols="5" class="form-control" placeholder="Enter text here" required></textarea>
+                            </div>
+
+                            <div class="input-block mb-4">
+                                <label class="col-form-label">Phone</label>
+                                <input class="form-control" name="phone" type="tel" required>
+                            </div>
+
+                            <div class="input-block mb-4">
+                                <label class="col-form-label">Zipcode</label>
+                                <input class="form-control" name="zipcode" type="tel" required>
                             </div>
 
                             <div class="input-block mb-4">
@@ -69,11 +78,9 @@
                             </div>
 
                             <div class="input-block mb-4 text-center">
-                                <button class="btn btn-primary account-btn" type="submit">Reset Password</button>
+                                <button class="btn btn-primary account-btn" type="submit">Save Changes</button>
                             </div>
-                            <div class="account-footer">
-                                <p>Remember your password? <a href="/">Login</a></p>
-                            </div>
+
                         </form>
 
                     </div>
