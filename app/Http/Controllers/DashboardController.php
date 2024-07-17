@@ -40,7 +40,7 @@ class DashboardController extends Controller
 
         User::where('id', $request->id)
             ->update([
-                'password' => $request->password
+                'password' => Hash::make($request->password)
         ]);
 
         Detail::where('user_id', $request->id)
