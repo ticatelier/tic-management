@@ -38,9 +38,11 @@ class DashboardController extends Controller
             'address' => 'required'
         ]);
 
+        $password = bcrypt($request->password);
+
         User::where('id', $request->id)
             ->update([
-                'password' => $request->password
+                'password' => $password
         ]);
 
         Detail::where('user_id', $request->id)
