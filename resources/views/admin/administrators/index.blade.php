@@ -91,7 +91,7 @@
                                                             <a href="">{{ $user->name }} </a>
                                                         </h2>
                                                     </td>
-                                                    <td></td>
+                                                    <td>{{ $user->detail->phone }}</td>
                                                     <td>{{ $user->email }}</td>
                                                     <td>
                                                         <div class="dropdown action-label">
