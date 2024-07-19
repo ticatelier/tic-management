@@ -12,7 +12,7 @@
                                 class="menu-arrow"></span></a>
                         <ul>
                             <li><a href="{{ route('trainer.clients.index') }}">My Clients</a></li>
-                            <li><a href="{{ route('admin.users.create') }}">Client History</a></li>
+                            {{-- <li><a href="{{ route('admin.users.create') }}">Client History</a></li> --}}
                         </ul>
                     </li>
 
@@ -44,7 +44,7 @@
                             class="menu-arrow"></span></a>
                     <ul>
                         <li><a href="{{ route('trainer.clients.index') }}">My Clients</a></li>
-                        <li><a href="{{ route('admin.users.create') }}">Client History</a></li>
+                        {{-- <li><a href="{{ route('admin.users.create') }}">Today's Service</a></li> --}}
                     </ul>
                 </li>
 

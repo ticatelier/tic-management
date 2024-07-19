@@ -26,10 +26,10 @@
             </div>
 
             <div class="row justify-content-center">
-                <div class="col-lg-8">
+                <div class="col-lg-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title mb-0">Add Trainer</h4>
+                            <h4 class="card-title mb-0">Edit Trainer</h4>
                         </div>
                         <div class="card-body">
                             @if($errors)
@@ -56,7 +56,7 @@
 
                                 <div class="col-auto float-end ms-auto">
                                     <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#add_trainer"><i
-                                            class="fa-solid fa-plus"></i> Edit Trainer</button>
+                                            class="fa-solid fa-plus"></i> Save Changes</button>
                                 </div>
                                 {{-- <div class="input-block mb-3 row">
                                     <label class="col-form-label col-md-2">Password</label>

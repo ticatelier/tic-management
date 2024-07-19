@@ -40,9 +40,9 @@
                                     <div class="alert alert-danger">{{ $error }}</div>
                                 @endforeach
                             @endif
-                            <form method="POST" action="{{ url('roles/'.$role->id.'/give-permissions') }}">
+                            <form method="POST" action="{{ url('roles/give-permissions/add') }}">
                                 @csrf
-
+                                <input type="text" name="id" value="{{ $role->id }}" hidden>
                                 @foreach ($permissions as $permission)
                                     <div class="input-block mb-3 row">
                                         <div class="col-md-12">

@@ -28,7 +28,7 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title mb-0">Add Service</h4>
+                            <h4 class="card-title mb-0">Edit Service</h4>
                         </div>
                         <div class="card-body">
                             @if($errors)
@@ -36,25 +36,26 @@
                                     <div class="alert alert-danger">{{ $error }}</div>
                                 @endforeach
                             @endif
-                            <form method="POST" action="{{ route('admin.service.store') }}">
+                            <form method="POST" action="{{ route('admin.service.update') }}">
                                 @csrf
+                                <input type="hidden" value="{{ $service->id }}" name="id">
                                 <div class="input-block mb-3 row">
                                     <label class="col-form-label col-md-2">Type</label>
                                     <div class="col-md-10">
-                                        <input name="type" type="text" class="form-control">
+                                        <input name="type" value="{{ $service->type }}" type="text" class="form-control">
                                     </div>
                                 </div>
 
                                 <div class="input-block mb-3 row">
                                     <label class="col-form-label col-md-2">Description</label>
                                     <div class="col-md-10">
-                                        <textarea rows="5" cols="5" name="description" class="form-control" placeholder="Enter text here"></textarea>
+                                        <textarea rows="5" cols="5" name="description" value="{{ $service->description }}" class="form-control" placeholder="Enter text here"></textarea>
                                     </div>
                                 </div>
 
                                 <div class="col-auto float-end ms-auto">
                                     <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#add_trainer"><i
-                                            class="fa-solid fa-plus"></i> Add Service</button>
+                                            class="fa-solid fa-plus"></i> Save Changes</button>
                                 </div>
                                 {{-- <div class="input-block mb-3 row">
                                     <label class="col-form-label col-md-2">Password</label>

@@ -192,6 +192,19 @@ class ClientController extends Controller
         return redirect()->back();
     }
 
+    public function destroysubscription(Request $request)
+    {
+        $access = $this->access();
+        if($access == 'no access'){
+            Alert::error('Access Denied', 'You are trespassing and going beyond limits');
+            return redirect()->back();
+        }
+        $id = $request->vim;
+        ClientSubscription::find($id)->delete();
+        Alert::success('Deleted', 'Deleted Successfully');
+        return redirect()->back();
+    }
+
     public function expiringPOS(){
         $date = Carbon::now();
         $monthYear = $date->format('Y-m');

@@ -119,12 +119,16 @@
                                                                 data-bs-toggle="dropdown" aria-expanded="false"><i
                                                                     class="material-icons">more_vert</i></a>
                                                             <div class="dropdown-menu dropdown-menu-right">
-                                                                <a class="dropdown-item" href="#"
-                                                                    data-bs-toggle="modal" data-bs-target="#edit_type"><i
-                                                                        class="fa-solid fa-pencil m-r-5"></i> Edit</a>
-                                                                <a class="dropdown-item" href="#"
-                                                                    data-bs-toggle="modal" data-bs-target="#delete_type"><i
-                                                                        class="fa-regular fa-trash-can m-r-5"></i> Delete</a>
+                                                                <form action="{{ route('admin.users.subscription.destroy') }}" method="POST">
+                                                                    @csrf
+                                                                    <input type="text" name="vim" value="{{ $user->id }}" hidden>
+
+                                                                    <button class="dropdown-item" href="#"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#delete_type"><i
+                                                                            class="fa-regular fa-trash-can m-r-5"></i>
+                                                                        Delete</button>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </td>

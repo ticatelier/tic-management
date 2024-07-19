@@ -20,8 +20,8 @@
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
-                        <a href="{{ route('admin.service.create') }}" ><button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#add_trainer"><i
-                                class="fa-solid fa-plus"></i> Add New Service</button></a>
+                        <a href="{{ route('admin.service.create') }}"><button class="btn btn-info" data-bs-toggle="modal"
+                                data-bs-target="#add_trainer"><i class="fa-solid fa-plus"></i> Add New Service</button></a>
                     </div>
                 </div>
             </div>
@@ -101,18 +101,35 @@
 
                                                     <td class="text-end">
                                                         <div class="dropdown dropdown-action">
-                                                            <a href="#" class="action-icon dropdown-toggle"
-                                                                data-bs-toggle="dropdown" aria-expanded="false"><i
-                                                                    class="material-icons">more_vert</i></a>
-                                                            <div class="dropdown-menu dropdown-menu-right">
-                                                                <a class="dropdown-item" href="#"
-                                                                    data-bs-toggle="modal" data-bs-target="#edit_type"><i
-                                                                        class="fa-solid fa-pencil m-r-5"></i> Edit</a>
-                                                                <a class="dropdown-item" href="#"
-                                                                    data-bs-toggle="modal" data-bs-target="#delete_type"><i
-                                                                        class="fa-regular fa-trash-can m-r-5"></i> Delete</a>
+                                                            <div class="dropdown dropdown-action">
+                                                                <a href="#" class="action-icon dropdown-toggle"
+                                                                    data-bs-toggle="dropdown" aria-expanded="false"><i
+                                                                        class="material-icons">more_vert</i></a>
+                                                                <div class="dropdown-menu dropdown-menu-right">
+                                                                    <form action="{{ route('admin.service.edit') }}">
+                                                                        @csrf
+                                                                        <input type="text" name="vim"
+                                                                            value="{{ $service->id }}" hidden>
+                                                                        <button class="dropdown-item" href="#"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#edit_type"><i
+                                                                                class="fa-solid fa-pencil m-r-5"></i>
+                                                                            Edit</button>
+                                                                    </form>
+                                                                    <form action="{{ route('admin.service.destroy') }}"
+                                                                        method="POST">
+                                                                        @csrf
+                                                                        <input type="text" name="vim"
+                                                                            value="{{ $service->id }}" hidden>
+
+                                                                        <button class="dropdown-item" href="#"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#delete_type"><i
+                                                                                class="fa-regular fa-trash-can m-r-5"></i>
+                                                                            Delete</button>
+                                                                    </form>
+                                                                </div>
                                                             </div>
-                                                        </div>
                                                     </td>
                                                 </tr>
                                             @endforeach

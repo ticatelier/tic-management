@@ -26,7 +26,7 @@
             </div>
 
             <div class="row justify-content-center">
-                <div class="col-lg-8">
+                <div class="col-lg-6">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title mb-0">Monthly Attendance</h4>
@@ -39,6 +39,20 @@
                             @endif
                             <form method="POST" action="{{ route('admin.analytics.monthly.get') }}">
                                 @csrf
+                                <div class="input-block mb-3 row">
+                                    <label class="col-form-label col-md-2">Service Type</label>
+                                    <div class="col-md-10">
+                                        <select name="service" class="form-control form-select">
+                                            <option value="" selected disabled>-- Select --</option>
+                                            <option value="all">All Services</option>
+                                            @foreach ($services as $service)
+                                                <option value="{{ $service->type }}">{{ $service->type }}</option>
+                                            @endforeach
+
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <div class="input-block mb-3 row">
                                     <label class="col-form-label col-md-2">Select Month</label>
                                     <div class="col-md-10">

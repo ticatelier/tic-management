@@ -26,10 +26,10 @@
             </div>
 
             <div class="row justify-content-center">
-                <div class="col-lg-8">
+                <div class="col-lg-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title mb-0">Add Service Option</h4>
+                            <h4 class="card-title mb-0">Edit Service Option</h4>
                         </div>
                         <div class="card-body">
                             @if($errors)
@@ -39,6 +39,7 @@
                             @endif
                             <form method="POST" action="{{ route('admin.service.option.update') }}">
                                 @csrf
+                                <input type="hidden" name="id" value="{{ $option->id }}">
                                 <div class="input-block mb-3 row">
                                     <label class="col-form-label col-md-2">Service Type</label>
                                     <div class="col-md-10">
@@ -76,7 +77,7 @@
 
                                 <div class="col-auto float-end ms-auto">
                                     <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#add_trainer"><i
-                                            class="fa-solid fa-plus"></i> Update Service Option</button>
+                                            class="fa-solid fa-plus"></i> Save Changes</button>
                                 </div>
                                 {{-- <div class="input-block mb-3 row">
                                     <label class="col-form-label col-md-2">Password</label>

@@ -101,16 +101,30 @@
                                                             <a href="#" class="action-icon dropdown-toggle"
                                                                 data-bs-toggle="dropdown" aria-expanded="false"><i
                                                                     class="material-icons">more_vert</i></a>
-                                                            <div class="dropdown-menu dropdown-menu-right">
-                                                                <a class="dropdown-item" href="#"
-                                                                    data-bs-toggle="modal" data-bs-target="#edit_type"><i
-                                                                        class="fa-solid fa-pencil m-r-5"></i> Edit</a>
-                                                                <a class="dropdown-item" href="#"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#delete_type"><i
-                                                                        class="fa-regular fa-trash-can m-r-5"></i>
-                                                                    Delete</a>
-                                                            </div>
+                                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                                        <form action="{{ route('admin.service.option.edit') }}">
+                                                                            @csrf
+                                                                            <input type="text" name="vim"
+                                                                                value="{{ $option->id }}" hidden>
+                                                                            <button class="dropdown-item" href="#"
+                                                                                data-bs-toggle="modal"
+                                                                                data-bs-target="#edit_type"><i
+                                                                                    class="fa-solid fa-pencil m-r-5"></i>
+                                                                                Edit</button>
+                                                                        </form>
+                                                                        <form action="{{ route('admin.service.option.destroy') }}"
+                                                                            method="POST">
+                                                                            @csrf
+                                                                            <input type="text" name="vim"
+                                                                                value="{{ $option->id }}" hidden>
+
+                                                                            <button class="dropdown-item" href="#"
+                                                                                data-bs-toggle="modal"
+                                                                                data-bs-target="#delete_type"><i
+                                                                                    class="fa-regular fa-trash-can m-r-5"></i>
+                                                                                Delete</button>
+                                                                        </form>
+                                                                    </div>
                                                         </div>
                                                     </td>
                                                 </tr>

@@ -18,7 +18,7 @@ class ServiceController extends Controller
     public function __construct()
     {
         $this->middleware('permission:view service note', ['only' => ['servicenote']]);
-        $this->middleware('permission:create monthly attendance', ['only' => ['calender']]);
+        $this->middleware('permission:view monthly attendance', ['only' => ['calender', 'precalender']]);
     }
     private function access(){
         $role = User::find(Auth::id())->role;
@@ -74,6 +74,19 @@ class ServiceController extends Controller
         return redirect()->back();
     }
 
+    public function edit(Request $request)
+    {
+        $access = $this->access();
+        if($access == 'no access'){
+            Alert::error('Access Denied', 'You are trespassing and going beyond limits');
+            return redirect()->back();
+        }
+
+        $id = $request->vim;
+        $service = ServiceType::where('id', $id)->first();
+        return view('admin.services.edit', ['service' => $service]);
+    }
+
     public function update(Request $request)
     {
         $access = $this->access();
@@ -81,6 +94,20 @@ class ServiceController extends Controller
             Alert::error('Access Denied', 'You are trespassing and going beyond limits');
             return redirect()->back();
         }
+
+        $request->validate([
+            'type' => 'required',
+            'description' => 'required',
+        ]);
+
+        ServiceType::where('id', $request->id)
+            ->update([
+            'type' => $request->type,
+            'description' => $request->description,
+        ]);
+
+        Alert::success('Successful', $request->type.' has be updated successfully');
+        return redirect()->route('admin.service.index');
     }
 
     public function destroy(Request $request)
@@ -90,6 +117,10 @@ class ServiceController extends Controller
             Alert::error('Access Denied', 'You are trespassing and going beyond limits');
             return redirect()->back();
         }
+        $id = $request->vim;
+        ServiceType::find($id)->delete();
+        Alert::success('Deleted', 'Deleted Successfully');
+        return redirect()->back();
     }
 
     public function option()
@@ -145,7 +176,47 @@ class ServiceController extends Controller
             return redirect()->back();
         }
         $services = ServiceType::orderBy('type', 'asc')->get();
-        return view('admin.services.option.create', ['services' => $services]);
+        $option = ServiceOption::where('id', $request->vim)->first();
+        return view('admin.services.option.edit', ['services' => $services, 'option' => $option]);
+    }
+
+    public function option_update(Request $request)
+    {
+        $access = $this->access();
+        if($access == 'no access'){
+            Alert::error('Access Denied', 'You are trespassing and going beyond limits');
+            return redirect()->back();
+        }
+        $request->validate([
+            'option' => 'required',
+            'service' => 'required',
+            'hours' => 'required',
+            'rate' => 'required',
+        ]);
+
+        ServiceOption::where('id', $request->id)
+            ->update([
+            'service_type_id' => $request->service,
+            'option' => $request->option,
+            'hours' => $request->hours,
+            'rate' => $request->rate,
+        ]);
+
+        Alert::success('Successful', $request->option.' has be updated successfully');
+        return redirect()->route('admin.service.option');
+    }
+
+    public function option_destroy(Request $request)
+    {
+        $access = $this->access();
+        if($access == 'no access'){
+            Alert::error('Access Denied', 'You are trespassing and going beyond limits');
+            return redirect()->back();
+        }
+        $id = $request->vim;
+        ServiceOption::find($id)->delete();
+        Alert::success('Deleted', 'Deleted Successfully');
+        return redirect()->back();
     }
 
     public function pre_calender(){
@@ -154,9 +225,10 @@ class ServiceController extends Controller
             Alert::error('Access Denied', 'You are trespassing and going beyond limits');
             return redirect()->back();
         }
+        $services = ServiceType::orderBy('type', 'asc')->get();
         $years = ServiceNote::distinct()->select('year')->get();
         $months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'Semptember', 'October', 'November', 'December'];
-        return view('admin.analytics.getMonthly', ['years' => $years, 'months' => $months]);
+        return view('admin.analytics.getMonthly', ['years' => $years, 'months' => $months, 'services' => $services]);
     }
 
     public function calender(Request $request)
@@ -169,9 +241,19 @@ class ServiceController extends Controller
         $request->validate([
             'month' => 'required',
             'year' => 'required',
+            ''
         ]);
 
-        $attendance = ServiceNote::where(['month' => $request->month, 'year' => $request->year])->get()->groupBy('client_id');
+        if($request->service == 'all'){
+            $attendance = ServiceNote::where(['month' => $request->month, 'year' => $request->year])->get()->groupBy('client_id');
+        }else{
+            $group = ServiceNote::where(['month' => $request->month, 'year' => $request->year])->get()->groupBy('client_id');
+            foreach($group as $item){
+                if($item->first()->subscription->service->service->type == $request->service){
+                    $attendance[] = $item;
+                }
+            }
+        }
         // foreach($attendance as $one){
         //     $date = Carbon::parse($request->timein)->format('d');
         //     echo $date;
