@@ -96,7 +96,11 @@
                                                     </td>
                                                     {{-- <td></td> --}}
                                                     <td>{{ $user->email }}</td>
-                                                    <td>{{ $user->subscription->service->option }}</td>
+                                                    <td>
+                                                        @if($user->subscription != null)
+                                                            {{ $user->subscription->service->option }}
+                                                        @endif
+                                                    </td>
                                                     <td>
                                                         <div class="dropdown action-label">
                                                             <a class="btn btn-white btn-sm btn-rounded dropdown-toggle"

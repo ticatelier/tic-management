@@ -54,8 +54,12 @@ class ServiceNoteController extends Controller
         ]);
 
         // check the subscription
-        $status = ClientSubscription::where('user_id', $request->client)->first()->status;
-        if($status == 'unactive'){
+        $status = ClientSubscription::where('user_id', $request->client)->first();
+        if($status == null){
+            Alert::error('Error', 'No active subscription for selected client');
+            return redirect()->back();
+        }
+        if($status->status == 'unactive'){
             Alert::error('Error', 'No active subscription for selected client');
             return redirect()->back();
         }

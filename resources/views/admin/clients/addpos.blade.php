@@ -44,8 +44,33 @@
                                     <div class="col-md-10">
                                         <select name="user" class="form-control form-select">
                                             <option value="" selected disabled>-Select Participant</option>
-                                            @foreach ($all as $sub)
-                                                <option value="{{ $sub->user_id }}">{{ $sub->user->name }} ({{ $sub->service->option }})</option>
+                                            @foreach ($users as $sub)
+                                                <option value="{{ $sub->id }}">{{ $sub->name }} (
+                                                        @if($sub->subscription != null)
+                                                            {{ $sub->subscription->service->option }}
+                                                        @endif
+                                                    )
+                                                </option>
+                                            @endforeach
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="input-block mb-3 row">
+                                    <label class="col-form-label col-md-2">Service Option</label>
+                                    <div class="col-md-10">
+                                        <select name="service" class="form-control form-select">
+                                            <option value="" selected disabled>-Select Service Option</option>
+                                            <option value="same">Use Current</option>
+                                            @foreach ($services as $service)
+                                                <option value="" disabled>---- {{ $service->type }} ----</option>
+                                                @php
+                                                    $collection = $service->options
+                                                @endphp
+                                                @foreach ($collection as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->option }}</option>
+                                                @endforeach
                                             @endforeach
 
                                         </select>

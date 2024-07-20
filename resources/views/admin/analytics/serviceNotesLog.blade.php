@@ -96,7 +96,7 @@
                                                                     <td>{{ $note->Location }}</td>
                                                                     <td>{{ $note->timein }}</td>
                                                                     <td>{{ $note->timeout }}</td>
-                                                                    <td>{{ $note->created_at }}</td>
+                                                                    <td>{{ Carbon\Carbon::parse($note->created_at)->format("m-d-Y") }}</td>
 
                                                                     <td class="text-end">
                                                                         <form action="{{ route('admin.analytics.servicenote') }}" method="GET">

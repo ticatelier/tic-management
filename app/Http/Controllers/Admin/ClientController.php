@@ -162,7 +162,9 @@ class ClientController extends Controller
             return redirect()->back();
         }
         $all = ClientSubscription::get();
-        return view('admin.clients.addpos', ['all' => $all]);
+        $users = User::where('role', 'user')->get();
+        $services = ServiceType::orderBy('type', 'asc')->get();
+        return view('admin.clients.addpos', ['all' => $all, 'users' => $users, 'services' => $services]);
     }
 
     public function storesubscription(Request $request){
@@ -175,16 +177,34 @@ class ClientController extends Controller
             'posnumber' => 'unique:client_subscriptions|required|regex:/^(\d{8})$/',
             'user' => 'required',
             'startdate' => 'required',
+            'service' => 'required',
             'duedate' => 'required',
         ]);
 
-        ClientSubscription::where('user_id', $request->user)
-            ->update([
+        $user = ClientSubscription::where('user_id', $request->user)->first();
+
+        if($user != null){
+            ClientSubscription::where('user_id', $request->user)
+                ->update([
+                    'posnumber' => $request->posnumber,
+                    'startdate' => $request->startdate,
+                    'duedate' => $request->duedate,
+                    'status' => 'active',
+            ]);
+        }else{
+            if($request->service == 'same'){
+                Alert::error('No Service Type', 'No current service type for selected participant');
+                return redirect()->back();
+            }
+            ClientSubscription::create([
                 'posnumber' => $request->posnumber,
                 'startdate' => $request->startdate,
                 'duedate' => $request->duedate,
+                'service_option_id' => $request->service,
                 'status' => 'active',
-        ]);
+                'user_id' => $request->user,
+            ]);
+        }
 
         $user = ClientSubscription::where('user_id', $request->user)->first();
 

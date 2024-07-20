@@ -113,7 +113,7 @@
                             <div class="input-block mb-3 row">
                                 <label class="col-form-label col-md-2">Categories</label>
                                 <div class="col-md-10">
-                                    <div class="input-block mb-3 form-focus select-focus focused" data-select2-id="select2-data-5-083d" style="height: 50px">
+                                    <div class="input-block mb-3 form-focus select-focus focused" data-select2-id="select2-data-5-083d">
 
                                         <select name="categories[]" class="select floating select2-hidden-accessible" id="multiple-checkboxes"
                                             multiple="multiple" style="height: 50px">

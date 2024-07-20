@@ -47,6 +47,10 @@
                             @endforeach
                         @endif
 
+                        @if(session()->has('status'))
+                            <div class="alert alert-success">{{ session()->get('status') }}</div>
+                        @endif
+
                         <form method="POST" action="{{ route('password.email') }}">
                             @csrf
                             <div class="input-block mb-4">

@@ -49,7 +49,12 @@
                             <select name="users[]" class="select floating select2-hidden-accessible" id="multiple-checkboxes"
                                 multiple="multiple" style="height: 50px">
                                 @foreach ($clients as $client)
-                                    <option value="{{ $client->id }}">{{ $client->name }}</option>
+                                    <option value="{{ $client->id }}">{{ $client->name }} (
+                                        @if($client->subscription != null)
+                                            {{ $client->subscription->service->option }}
+                                        @endif
+                                    )
+                                </option>
                                 @endforeach
                             </select>
                             <label class="focus-label">Select User</label>
