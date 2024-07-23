@@ -20,8 +20,8 @@
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
-                        <a href="{{ route('admin.analytics.servicenote.form') }}"><button class="btn btn-info" data-bs-toggle="modal"
-                                data-bs-target="#add_trainer"> Service Notes</button></a>
+                        <a href="{{ route('admin.analytics.servicenote.form') }}"><button class="btn btn-info"
+                                data-bs-toggle="modal" data-bs-target="#add_trainer"> Service Notes</button></a>
                     </div>
                 </div>
             </div>
@@ -36,43 +36,54 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="table-responsive">
-                                        <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                                        <div id="DataTables_Table_0_wrapper"
+                                            class="dataTables_wrapper dt-bootstrap4 no-footer">
                                             <div class="row">
                                                 <div class="col-sm-12">
-                                                    <table class="table table-striped custom-table mb-0 datatable dataTable no-footer"
-                                                        id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                                                    <table
+                                                        class="table table-striped custom-table mb-0 datatable dataTable no-footer"
+                                                        id="DataTables_Table_0" role="grid"
+                                                        aria-describedby="DataTables_Table_0_info">
                                                         <thead>
                                                             <tr role="row">
                                                                 <th class="width-thirty sorting_asc" tabindex="0"
-                                                                    aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                                                                    aria-sort="ascending" aria-label="#: activate to sort column descending"
+                                                                    aria-controls="DataTables_Table_0" rowspan="1"
+                                                                    colspan="1" aria-sort="ascending"
+                                                                    aria-label="#: activate to sort column descending"
                                                                     style="width: 11.1094px;">#</th>
-                                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
-                                                                    rowspan="1" colspan="1"
+                                                                <th class="sorting" tabindex="0"
+                                                                    aria-controls="DataTables_Table_0" rowspan="1"
+                                                                    colspan="1"
                                                                     aria-label="Client Name : activate to sort column ascending"
                                                                     style="width: 140.922px;">Client Name </th>
-                                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
-                                                                    rowspan="1" colspan="1"
+                                                                <th class="sorting" tabindex="0"
+                                                                    aria-controls="DataTables_Table_0" rowspan="1"
+                                                                    colspan="1"
                                                                     aria-label="Trainer Name : activate to sort column ascending"
                                                                     style="width: 115.406px;">Trainer Name </th>
-                                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
-                                                                    rowspan="1" colspan="1"
+                                                                <th class="sorting" tabindex="0"
+                                                                    aria-controls="DataTables_Table_0" rowspan="1"
+                                                                    colspan="1"
                                                                     aria-label="Location : activate to sort column ascending"
                                                                     style="width: 178.703px;">Location </th>
-                                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
-                                                                    rowspan="1" colspan="1"
+                                                                <th class="sorting" tabindex="0"
+                                                                    aria-controls="DataTables_Table_0" rowspan="1"
+                                                                    colspan="1"
                                                                     aria-label="Time in : activate to sort column ascending"
                                                                     style="width: 119.109px;">Time in </th>
-                                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
-                                                                    rowspan="1" colspan="1"
+                                                                <th class="sorting" tabindex="0"
+                                                                    aria-controls="DataTables_Table_0" rowspan="1"
+                                                                    colspan="1"
                                                                     aria-label="Time out : activate to sort column ascending"
                                                                     style="width: 97.4531px;">Time out </th>
-                                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
-                                                                    rowspan="1" colspan="1"
+                                                                <th class="sorting" tabindex="0"
+                                                                    aria-controls="DataTables_Table_0" rowspan="1"
+                                                                    colspan="1"
                                                                     aria-label="Created at : activate to sort column ascending"
                                                                     style="width: 97.4531px;">Created at </th>
                                                                 <th class="text-end sorting" tabindex="0"
-                                                                    aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                                                                    aria-controls="DataTables_Table_0" rowspan="1"
+                                                                    colspan="1"
                                                                     aria-label="Action: activate to sort column ascending"
                                                                     style="width: 45.4062px;">Action</th>
                                                             </tr>
@@ -96,13 +107,18 @@
                                                                     <td>{{ $note->Location }}</td>
                                                                     <td>{{ $note->timein }}</td>
                                                                     <td>{{ $note->timeout }}</td>
-                                                                    <td>{{ Carbon\Carbon::parse($note->created_at)->format("m-d-Y") }}</td>
+                                                                    <td>{{ Carbon\Carbon::parse($note->created_at)->format('m-d-Y') }}
+                                                                    </td>
 
                                                                     <td class="text-end">
-                                                                        <form action="{{ route('admin.analytics.servicenote') }}" method="GET">
+                                                                        <form
+                                                                            action="{{ route('admin.analytics.servicenote') }}"
+                                                                            method="GET">
                                                                             @csrf
-                                                                            <input type="text" name="vim" value="{{ $note->id }}" hidden>
-                                                                            <button class="dropdown-item" href="#">View Service Note</button>
+                                                                            <input type="text" name="vim"
+                                                                                value="{{ $note->id }}" hidden>
+                                                                            <button class="dropdown-item"
+                                                                                href="#">View Service Note</button>
                                                                         </form>
                                                                     </td>
                                                                 </tr>
@@ -112,11 +128,8 @@
                                                     </table>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                {{-- <div class="col-sm-12 col-md-5">
-                                                    <div class="dataTables_info" id="DataTables_Table_0_info" role="status"
-                                                        aria-live="polite">Showing 1 to 5 of 5 entries</div>
-                                                </div> --}}
+                                            {{-- <div class="row">
+
                                                 <div class="col-sm-12 col-md-7">
                                                     <div class="dataTables_paginate paging_simple_numbers"
                                                         id="DataTables_Table_0_paginate">
@@ -135,7 +148,7 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -156,4 +169,3 @@
     <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }}" type="text/javascript"></script>
 @endpush
-

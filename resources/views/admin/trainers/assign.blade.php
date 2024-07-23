@@ -31,6 +31,7 @@
             <form method="POST" action="{{ route('admin.trainer.assign.store') }}">
                 @csrf
                 <div class="row filter-row">
+
                     <div class="col-sm-6 col-md-3" data-select2-id="select2-data-6-jit7">
                         <div class="input-block mb-3 form-focus select-focus focused" data-select2-id="select2-data-5-083d">
                             <select name="trainer" class="select floating select2-hidden-accessible"
@@ -46,21 +47,22 @@
                     </div>
                     <div class="col-sm-6 col-md-3">
                         <div class="input-block mb-3 form-focus select-focus focused" data-select2-id="select2-data-5-083d">
-                            <select name="users[]" class="select floating select2-hidden-accessible" id="multiple-checkboxes"
-                                multiple="multiple" style="height: 50px">
+                            <select name="users[]" class="select floating select2-hidden-accessible"
+                                id="multiple-checkboxes" multiple="multiple" style="height: 50px">
                                 @foreach ($clients as $client)
                                     <option value="{{ $client->id }}">{{ $client->name }} (
-                                        @if($client->subscription != null)
+                                        @if ($client->subscription != null)
                                             {{ $client->subscription->service->option }}
                                         @endif
-                                    )
-                                </option>
+                                        )
+                                    </option>
                                 @endforeach
                             </select>
                             <label class="focus-label">Select User</label>
                             <span class="select2 select2-container select2-container--default select2-container--above"
                                 dir="ltr" data-select2-id="8" style="width: 431px;"><span
-                                    class="selection"></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                    class="selection"></span><span class="dropdown-wrapper"
+                                    aria-hidden="true"></span></span>
 
                             {{-- <span
                                 class="select2 select2-container select2-container--default select2-container--below select2-container--focus"
@@ -101,7 +103,8 @@
                                             <tr role="row">
                                                 <th class="width-thirty sorting_asc" tabindex="0"
                                                     aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                                                    aria-sort="ascending" aria-label="#: activate to sort column descending"
+                                                    aria-sort="ascending"
+                                                    aria-label="#: activate to sort column descending"
                                                     style="width: 11.1094px;">#</th>
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
                                                     rowspan="1" colspan="1"
@@ -150,14 +153,14 @@
                                                                 data-bs-toggle="dropdown" aria-expanded="false"><i
                                                                     class="material-icons">more_vert</i></a>
                                                             <div class="dropdown-menu dropdown-menu-right">
-                                                                <a class="dropdown-item" href="#"
-                                                                    data-bs-toggle="modal" data-bs-target="#edit_type"><i
-                                                                        class="fa-solid fa-pencil m-r-5"></i> Edit</a>
-                                                                <a class="dropdown-item" href="#"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#delete_type"><i
-                                                                        class="fa-regular fa-trash-can m-r-5"></i>
-                                                                    Delete</a>
+                                                                <form action="{{ route('admin.trainer.unassign') }}">
+                                                                    @csrf
+                                                                    <input type="text" name="vim" value="{{ $user->id }}" hidden>
+                                                                    <button class="dropdown-item" href="#"
+                                                                        data-bs-toggle="modal" data-bs-target="#edit_type"><i
+                                                                            class="fa-solid fa-pencil m-r-5"></i> Unassign</button>
+                                                                </form>
+
                                                             </div>
                                                         </div>
                                                     </td>

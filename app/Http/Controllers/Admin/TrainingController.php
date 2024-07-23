@@ -136,6 +136,30 @@ class TrainingController extends Controller
         return view('admin.trainers.assign', ['all' => $all, 'clients' => $clients]);
     }
 
+    public function unassign(Request $request){
+        $access = $this->access();
+        if($access == 'no access'){
+            Alert::error('Access Denied', 'You are trespassing and going beyond limits');
+            return redirect()->back();
+        }
+        $trainer = User::where('id', $request->vim)->first();
+        return view('admin.trainers.unassign', ['trainer' => $trainer]);
+    }
+
+    public function unassign_destroy(Request $request){
+        $access = $this->access();
+        if($access == 'no access'){
+            Alert::error('Access Denied', 'You are trespassing and going beyond limits');
+            return redirect()->back();
+        }
+        $request->validate([
+            'client' => 'required'
+        ]);
+        AssignTrainer::where(['trainer_id' => $request->id, 'client_id' => $request->client])->delete();
+        Alert::success('Deleted', 'Deleted Successfully');
+        return redirect()->intended(route('admin.trainer.assign'));;
+    }
+
     public function assign_store(Request $request){
         $access = $this->access();
         if($access == 'no access'){

@@ -48,6 +48,8 @@ Route::group(['prefix' => 'dashboard/admin', 'middleware' => ['auth', 'verified'
     Route::group(['prefix' => 'trainer'], function(){
         Route::get('/', [TrainingController::class, 'index'])->name('admin.trainer.index');
         Route::get('/assign-trainer', [TrainingController::class, 'assign'])->name('admin.trainer.assign');
+        Route::get('/unassign-trainer', [TrainingController::class, 'unassign'])->name('admin.trainer.unassign');
+        Route::post('/unassign-trainer', [TrainingController::class, 'unassign_destroy'])->name('admin.trainer.unassign.save');
         Route::post('/assign-trainer', [TrainingController::class, 'assign_store'])->name('admin.trainer.assign.store');
         Route::get('/add-trainer', [TrainingController::class, 'create'])->name('admin.trainer.create');
         Route::post('/add-trainer', [TrainingController::class, 'store'])->name('admin.trainer.store');
