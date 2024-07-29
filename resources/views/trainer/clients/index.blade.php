@@ -90,7 +90,7 @@
                                                             <a href="">{{ $user->client->name }} </a>
                                                         </h2>
                                                     </td>
-                                                    <td>{{ $user->client->email }}</td>
+                                                    <td>{{ $user->client->email ?? "N/A" }}</td>
                                                     <td>{{ Carbon\Carbon::parse($user->created_at)->format('m-d-Y') }}</td>
                                                     <td>
                                                         <form method="GET" action="{{ route('trainer.services.note') }}">

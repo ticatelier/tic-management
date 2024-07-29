@@ -1,4 +1,4 @@
-@extends('layouts.admin.app')
+@extends('layouts.trainer.app')
 
 @push('css')
 
@@ -19,8 +19,8 @@
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
-                        <a href="{{ route('admin.analytics.servicenote.form') }}"><button class="btn btn-info" data-bs-toggle="modal"
-                                data-bs-target="#add_trainer"> Service Note</button></a>
+                        <a href="{{ route('dashboard') }}"><button class="btn btn-info" data-bs-toggle="modal"
+                                data-bs-target="#add_trainer"> Dashboard</button></a>
                     </div>
                 </div>
             </div>

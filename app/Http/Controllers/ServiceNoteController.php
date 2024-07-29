@@ -54,7 +54,7 @@ class ServiceNoteController extends Controller
         ]);
 
         // check the subscription
-        $status = ClientSubscription::where('user_id', $request->client)->first();
+        $status = ClientSubscription::where('user_id', $request->client)->latest()->first();
         if($status == null){
             Alert::error('Error', 'No active subscription for selected client');
             return redirect()->back();
@@ -64,15 +64,34 @@ class ServiceNoteController extends Controller
             return redirect()->back();
         }
 
+        $max_hour = $status->service->hours;
+
         $start = Carbon::parse($request->timein);
         $end = Carbon::parse($request->timeout);
         $hours = $start->diffInHours($end);
-
 
         $date = Carbon::now();
         $monthName = $date->format('F');
         $day = $date->format('l');
         $year = $date->format('Y');
+
+        // Sum of the previous hours and the entered hours
+        $service_hour = ServiceNote::where([
+            'client_id' => $request->client,
+            'month' => $monthName,
+            'year' => $year
+        ])->sum('daily_hour');
+
+        $client_hour = $hours;
+
+        if($service_hour != null){
+            $client_hour = $client_hour + $service_hour;
+        }
+
+        if($client_hour > $max_hour){
+            Alert::error('Maximum Hours', 'Maximum Hours logged in already');
+            return redirect()->back();
+        }
 
         if($hours <= 0){
             Alert::error('Invalid Hours Spent', 'Check your time in and time out values');
@@ -105,5 +124,10 @@ class ServiceNoteController extends Controller
 
         Alert::success('Successful', 'Service note has be added successfully');
         return redirect()->intended(route('trainer.clients.index'));
+    }
+
+    public function servicenote(Request $request){
+        $note = ServiceNote::where('id', $request->client)->first();
+        return view('trainer.services.singleServiceNote', ['note' => $note]);
     }
 }

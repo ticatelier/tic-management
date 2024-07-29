@@ -25,6 +25,18 @@
                     'trainer_id',
                     Illuminate\Support\Facades\Auth::id()
                 )->latest()->take(3)->get();
+
+                $date = Carbon\Carbon::now();
+                $monthName = $date->format('F');
+                $day = $date->format('l');
+                $year = $date->format('Y');
+
+                $notesall = App\Models\ServiceNote::where([
+                    'trainer_id' => Illuminate\Support\Facades\Auth::id(),
+                    'day' => $day,
+                    'month' => $monthName,
+                    'year' => $year
+                ])->get();
             @endphp
 
             <div class="row">
@@ -56,7 +68,7 @@
                                                     </h2>
                                                 </td>
                                                 <td>
-                                                    {{ $item->client->email }}
+                                                    {{ $item->client->email ?? "N/A" }}
                                                 </td>
                                                 <td>
                                                     <div class="dropdown action-label">
@@ -90,22 +102,41 @@
                 <div class="col-md-6 d-flex">
                     <div class="card card-table flex-fill">
                         <div class="card-header">
-                            <h3 class="card-title mb-0">Service Notes</h3>
+                            <h3 class="card-title mb-0">Daily Service Notes</h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table custom-table mb-0">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Status</th>
+                                            <th>Name of Participants</th>
+                                            <th>Hours Spent</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
-
-
+                                        @foreach ($notesall as $item)
+                                            <tr>
+                                                <td>
+                                                    <h2 class="table-avatar">
+                                                        {{-- <a href="#" class="avatar"><img
+                                                    src="assets/img/profiles/avatar-19.jpg"
+                                                    alt="User Image"></a> --}}
+                                                        <a href="">{{ $item->client->name }}</a>
+                                                    </h2>
+                                                </td>
+                                                <td>
+                                                    {{ $item->daily_hour }}
+                                                </td>
+                                                <td>
+                                                    <form method="GET" action="{{ route('trainer.services.note.view') }}">
+                                                        @csrf
+                                                        <input type="text" name="client" value="{{ $item->id }}" hidden>
+                                                        <button type="submit" class="btn btn-info float-end">View Service Notes</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

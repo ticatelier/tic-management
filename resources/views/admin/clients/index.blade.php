@@ -95,7 +95,7 @@
                                                         </h2>
                                                     </td>
                                                     {{-- <td></td> --}}
-                                                    <td>{{ $user->email }}</td>
+                                                    <td>{{ $user->email ?? "N/A" }}</td>
                                                     <td>
                                                         @if($user->subscription != null)
                                                             {{ $user->subscription->service->option }}

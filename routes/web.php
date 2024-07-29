@@ -91,6 +91,7 @@ Route::group(['prefix' => 'dashboard/trainer', 'middleware' => ['auth', 'verifie
 
     Route::group(['prefix' => 'services'], function(){
         Route::get('/note', [ServiceNoteController::class, 'note'])->name('trainer.services.note');
+        Route::get('/servicenote', [ServiceNoteController::class, 'servicenote'])->name('trainer.services.note.view');
         Route::post('/note', [ServiceNoteController::class, 'note_create'])->name('trainer.services.note.create');
     });
 });
