@@ -174,7 +174,7 @@ class ClientController extends Controller
             return redirect()->back();
         }
         $request->validate([
-            'posnumber' => 'unique:client_subscriptions|required|regex:/^(\d{8})$/',
+            'posnumber' => 'unique:client_subscriptions|required|digits|regex:/^(\d{8})$/',
             'user' => 'required',
             'startdate' => 'required',
             'service' => 'required',
