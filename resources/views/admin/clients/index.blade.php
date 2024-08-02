@@ -128,6 +128,13 @@
                                                                     <input type="text" name="vim" value="{{ $user->id }}" hidden>
                                                                     <button class="dropdown-item" href="#"
                                                                         data-bs-toggle="modal" data-bs-target="#edit_type"><i
+                                                                            class="fa-solid fa-paperclip m-r-5"></i> Attachments</button>
+                                                                </form>
+                                                                <form action="{{ route('admin.users.edit') }}">
+                                                                    @csrf
+                                                                    <input type="text" name="vim" value="{{ $user->id }}" hidden>
+                                                                    <button class="dropdown-item" href="#"
+                                                                        data-bs-toggle="modal" data-bs-target="#edit_type"><i
                                                                             class="fa-solid fa-pencil m-r-5"></i> Edit</button>
                                                                 </form>
                                                                 <form action="{{ route('admin.users.destroy') }}" method="POST">

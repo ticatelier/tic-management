@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Detail;
+use App\Models\ClientFile;
 use App\Models\ServiceType;
 use App\Models\ClientSubscription;
 use Illuminate\Support\Facades\Hash;
@@ -86,6 +87,23 @@ class ClientController extends Controller
         Detail::create([
             'user_id' => $user->id
         ]);
+
+        $attachmentData = [];
+        if($files = $request->file('attachments')){
+            foreach($files as $key => $file){
+                $extension = $file->getClientOriginalExtension();
+                $filename = $key."-".time().".".$extension;
+
+                $path = "attachments/participants/";
+                $file->move($path, $filename);
+
+                $attachmentData[] = [
+                    'user_id' => $user->id,
+                    'path' => $filename
+                ];
+            }
+        }
+        ClientFile::insert($attachmentData);
 
         Alert::success('Successful', $request->name.' has be registered successfully');
         return redirect()->back();

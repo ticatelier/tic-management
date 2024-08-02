@@ -37,7 +37,7 @@
                                     <div class="alert alert-danger">{{ $error }}</div>
                                 @endforeach
                             @endif
-                            <form method="POST" action="{{ route('admin.users.store') }}">
+                            <form method="POST" action="{{ route('admin.users.store') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="input-block mb-3 row">
                                     <label class="col-form-label col-md-2">Name</label>
@@ -69,6 +69,13 @@
                                             @endforeach
 
                                         </select>
+                                    </div>
+                                </div>
+
+                                <div class="input-block mb-3 row">
+                                    <label class="col-form-label col-md-2">Attachments {Max: 10 files}</label>
+                                    <div class="col-md-10">
+                                        <input class="form-control" type="file" name="attachments[]" multiple>
                                     </div>
                                 </div>
 
