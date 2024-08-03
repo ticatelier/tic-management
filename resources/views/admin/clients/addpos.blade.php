@@ -80,21 +80,21 @@
                                 <div class="input-block mb-3 row">
                                     <label class="col-form-label col-md-2">Pos Number</label>
                                     <div class="col-md-10">
-                                        <input name="posnumber" type="text" class="form-control" required>
+                                        <input name="posnumber" type="text" class="form-control" placeholder="12345678" required>
                                     </div>
                                 </div>
 
                                 <div class="input-block mb-3 row">
                                     <label class="col-form-label col-md-2">Start Date</label>
                                     <div class="col-md-10">
-                                        <input name="startdate" type="date" class="form-control" required>
+                                        <input name="startdate" type="date" class="form-control" placeholder="mm-dd-yyyy" required>
                                     </div>
                                 </div>
 
                                 <div class="input-block mb-3 row">
                                     <label class="col-form-label col-md-2">Due Date</label>
                                     <div class="col-md-10">
-                                        <input name="duedate" type="date" class="form-control" required>
+                                        <input name="duedate" type="date" class="form-control" placeholder="mm-dd-yyyy" required>
                                     </div>
                                 </div>
 
