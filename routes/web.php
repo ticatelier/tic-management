@@ -23,6 +23,9 @@ Route::middleware('auth')->group(function () {
 Route::group(['prefix' => 'dashboard/admin', 'middleware' => ['auth', 'verified']], function () {
     Route::group(['prefix' => 'users'], function(){
         Route::get('/', [ClientController::class, 'index'])->name('admin.users.index');
+        Route::get('/attachments', [ClientController::class, 'attachment'])->name('admin.users.attachment');
+        Route::post('/add-attachments', [ClientController::class, 'add_attachment'])->name('admin.users.attachment.add');
+        Route::post('/delete-attachments', [ClientController::class, 'destroy_attachment'])->name('admin.users.attachment.delete');
         Route::get('/add-users', [ClientController::class, 'create'])->name('admin.users.create');
         Route::post('/add-users', [ClientController::class, 'store'])->name('admin.users.store');
         Route::get('/subscriptions', [ClientController::class, 'subscription'])->name('admin.users.subscription');

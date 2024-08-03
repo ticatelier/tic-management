@@ -123,7 +123,7 @@
                                                                 data-bs-toggle="dropdown" aria-expanded="false"><i
                                                                     class="material-icons">more_vert</i></a>
                                                             <div class="dropdown-menu dropdown-menu-right">
-                                                                <form action="{{ route('admin.users.edit') }}">
+                                                                <form action="{{ route('admin.users.attachment') }}">
                                                                     @csrf
                                                                     <input type="text" name="vim" value="{{ $user->id }}" hidden>
                                                                     <button class="dropdown-item" href="#"

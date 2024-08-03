@@ -150,6 +150,46 @@ class ClientController extends Controller
         return redirect()->back();
     }
 
+    public function attachment(Request $request)
+    {
+        $client = User::where('id', $request->vim)->first();
+        return view('admin.clients.attachment', ['client' => $client]);
+    }
+
+    public function add_attachment(Request $request)
+    {
+        $request->validate([
+            'attachments' => 'required'
+        ]);
+        $attachmentData = [];
+        if($files = $request->file('attachments')){
+            foreach($files as $key => $file){
+                $extension = $file->getClientOriginalExtension();
+                $filename = $key."-".time().".".$extension;
+
+                $path = "attachments/participants/";
+                $file->move($path, $filename);
+
+                $attachmentData[] = [
+                    'user_id' => $request->id,
+                    'path' => $filename
+                ];
+            }
+        }
+        ClientFile::insert($attachmentData);
+
+        Alert::success('Successful', 'Attachments added successfully');
+        return redirect()->back();
+    }
+
+    public function destroy_attachment(Request $request)
+    {
+        $id = $request->vim;
+        ClientFile::where('id', $id)->delete();
+        Alert::success('Deleted', 'Deleted Successfully');
+        return redirect()->back();
+    }
+
     public function destroy(Request $request)
     {
         $access = $this->access();
