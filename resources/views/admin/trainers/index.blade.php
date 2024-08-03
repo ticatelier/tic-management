@@ -47,6 +47,13 @@
                             </div> --}}
                             <div class="row">
                                 <div class="col-sm-12">
+                                    <div class="input-block row justify-content-end"
+                                        style="padding: 1px 10px; margin-right: 1px;">
+
+                                        <input class="form-control" type="text" id="myInput" onkeyup="myFunction()"
+                                            placeholder="Search for names.." style="width: 300px">
+
+                                    </div>
                                     <table class="table table-striped custom-table mb-0 datatable dataTable no-footer"
                                         id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                                         <thead>
@@ -93,16 +100,15 @@
                                                             <a href="">{{ $user->name }} </a>
                                                         </h2>
                                                     </td>
-                                                    <td>{{ $user->detail->phone ?? "N/A" }}</td>
+                                                    <td>{{ $user->detail->phone ?? 'N/A' }}</td>
                                                     <td>{{ $user->email }}</td>
                                                     <td>
                                                         <div class="dropdown action-label">
                                                             <a class="btn btn-white btn-sm btn-rounded dropdown-toggle"
                                                                 href="#" data-bs-toggle="dropdown"
                                                                 aria-expanded="false">
-                                                                <i
-                                                                        class="fa-regular fa-circle-dot text-success"></i>
-                                                                    Active
+                                                                <i class="fa-regular fa-circle-dot text-success"></i>
+                                                                Active
                                                             </a>
                                                             <div class="dropdown-menu">
                                                                 <a class="dropdown-item" href="#"><i
@@ -120,14 +126,19 @@
                                                             <div class="dropdown-menu dropdown-menu-right">
                                                                 <form action="{{ route('admin.trainer.edit') }}">
                                                                     @csrf
-                                                                    <input type="text" name="vim" value="{{ $user->id }}" hidden>
+                                                                    <input type="text" name="vim"
+                                                                        value="{{ $user->id }}" hidden>
                                                                     <button class="dropdown-item" href="#"
-                                                                        data-bs-toggle="modal" data-bs-target="#edit_type"><i
-                                                                            class="fa-solid fa-pencil m-r-5"></i> Edit</button>
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#edit_type"><i
+                                                                            class="fa-solid fa-pencil m-r-5"></i>
+                                                                        Edit</button>
                                                                 </form>
-                                                                <form action="{{ route('admin.trainer.destroy') }}" method="POST">
+                                                                <form action="{{ route('admin.trainer.destroy') }}"
+                                                                    method="POST">
                                                                     @csrf
-                                                                    <input type="text" name="vim" value="{{ $user->id }}" hidden>
+                                                                    <input type="text" name="vim"
+                                                                        value="{{ $user->id }}" hidden>
 
                                                                     <button class="dropdown-item" href="#"
                                                                         data-bs-toggle="modal"
@@ -177,6 +188,29 @@
 @endsection
 
 @push('js')
+    <script>
+        function myFunction() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("DataTables_Table_0");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
     <script src="{{ asset('assets/js/select2.min.js') }}" type="text/javascript"></script>
     {{-- <script src="{{ asset('assets/plugins/select2/js/select2.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/plugins/select2/js/custom-select.js') }}" type="text/javascript"></script> --}}

@@ -20,8 +20,9 @@
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
-                        <a href="{{ route('admin.administrators.create') }}" ><button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#add_trainer"><i
-                                class="fa-solid fa-plus"></i> Add New</button></a>
+                        <a href="{{ route('admin.administrators.create') }}"><button class="btn btn-info"
+                                data-bs-toggle="modal" data-bs-target="#add_trainer"><i class="fa-solid fa-plus"></i> Add
+                                New</button></a>
                     </div>
                 </div>
             </div>
@@ -45,6 +46,13 @@
                             </div> --}}
                             <div class="row">
                                 <div class="col-sm-12">
+                                    <div class="input-block row justify-content-end"
+                                        style="padding: 1px 10px; margin-right: 1px;">
+
+                                        <input class="form-control" type="text" id="myInput" onkeyup="myFunction()"
+                                            placeholder="Search for names.." style="width: 300px">
+
+                                    </div>
                                     <table class="table table-striped custom-table mb-0 datatable dataTable no-footer"
                                         id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                                         <thead>
@@ -91,16 +99,15 @@
                                                             <a href="">{{ $user->name }} </a>
                                                         </h2>
                                                     </td>
-                                                    <td>{{ $user->detail->phone ?? "N/A" }}</td>
+                                                    <td>{{ $user->detail->phone ?? 'N/A' }}</td>
                                                     <td>{{ $user->email }}</td>
                                                     <td>
                                                         <div class="dropdown action-label">
                                                             <a class="btn btn-white btn-sm btn-rounded dropdown-toggle"
                                                                 href="#" data-bs-toggle="dropdown"
                                                                 aria-expanded="false">
-                                                                <i
-                                                                        class="fa-regular fa-circle-dot text-success"></i>
-                                                                    Active</a>
+                                                                <i class="fa-regular fa-circle-dot text-success"></i>
+                                                                Active</a>
                                                             <div class="dropdown-menu">
                                                                 <a class="dropdown-item" href="#"><i
                                                                         class="fa-regular fa-circle-dot text-success"></i>
@@ -110,30 +117,41 @@
                                                         </div>
                                                     </td>
                                                     <td class="text-end">
-                                                        <div class="dropdown dropdown-action">
-                                                            <a href="#" class="action-icon dropdown-toggle"
-                                                                data-bs-toggle="dropdown" aria-expanded="false"><i
-                                                                    class="material-icons">more_vert</i></a>
-                                                            <div class="dropdown-menu dropdown-menu-right">
-                                                                <form action="{{ route('admin.administrators.edit') }}">
-                                                                    @csrf
-                                                                    <input type="text" name="vim" value="{{ $user->id }}" hidden>
-                                                                    <button class="dropdown-item" href="#"
-                                                                        data-bs-toggle="modal" data-bs-target="#edit_type"><i
-                                                                            class="fa-solid fa-pencil m-r-5"></i> Edit</button>
-                                                                </form>
-                                                                <form action="{{ route('admin.administrators.destroy') }}" method="POST">
-                                                                    @csrf
-                                                                    <input type="text" name="vim" value="{{ $user->id }}" hidden>
+                                                        @if ($user->role == 'superadmin')
+                                                        @else
+                                                            <div class="dropdown dropdown-action">
+                                                                <a href="#" class="action-icon dropdown-toggle"
+                                                                    data-bs-toggle="dropdown" aria-expanded="false"><i
+                                                                        class="material-icons">more_vert</i></a>
+                                                                <div class="dropdown-menu dropdown-menu-right">
+                                                                    <form
+                                                                        action="{{ route('admin.administrators.edit') }}">
+                                                                        @csrf
+                                                                        <input type="text" name="vim"
+                                                                            value="{{ $user->id }}" hidden>
+                                                                        <button class="dropdown-item" href="#"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#edit_type"><i
+                                                                                class="fa-solid fa-pencil m-r-5"></i>
+                                                                            Edit</button>
+                                                                    </form>
+                                                                    <form
+                                                                        action="{{ route('admin.administrators.destroy') }}"
+                                                                        method="POST">
+                                                                        @csrf
+                                                                        <input type="text" name="vim"
+                                                                            value="{{ $user->id }}" hidden>
 
-                                                                    <button class="dropdown-item" href="#"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#delete_type"><i
-                                                                            class="fa-regular fa-trash-can m-r-5"></i>
-                                                                        Delete</button>
-                                                                </form>
+                                                                        <button class="dropdown-item" href="#"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#delete_type"><i
+                                                                                class="fa-regular fa-trash-can m-r-5"></i>
+                                                                            Delete</button>
+                                                                    </form>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        @endif
+
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -142,7 +160,7 @@
                                     </table>
                                 </div>
                             </div>
-                             {{-- <div class="row">
+                            {{-- <div class="row">
 
                                 <div class="col-sm-12 col-md-7">
                                     <div class="dataTables_paginate paging_simple_numbers"
@@ -174,6 +192,29 @@
 @endsection
 
 @push('js')
+    <script>
+        function myFunction() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("DataTables_Table_0");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
     <script src="{{ asset('assets/js/select2.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/moment.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}" type="text/javascript"></script>

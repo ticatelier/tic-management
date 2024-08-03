@@ -45,6 +45,11 @@
                             </div> --}}
                             <div class="row">
                                 <div class="col-sm-12">
+                                    <div class="input-block row justify-content-end" style="padding: 1px 10px; margin-right: 1px;">
+                                        
+                                            <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." style="width: 300px">
+                                        
+                                    </div>
                                     <table class="table table-striped custom-table mb-0 datatable dataTable no-footer"
                                         id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
                                         <thead>
@@ -189,6 +194,29 @@
 @endsection
 
 @push('js')
+<script>
+    function myFunction() {
+      // Declare variables
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("DataTables_Table_0");
+      tr = table.getElementsByTagName("tr");
+    
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+    </script>
     <script src="{{ asset('assets/js/select2.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/moment.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}" type="text/javascript"></script>

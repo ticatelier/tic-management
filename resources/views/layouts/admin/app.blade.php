@@ -311,8 +311,8 @@
                         <span>Admin</span>
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">My Profile</a>
-                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item text-dark" href="#">My Profile</a>
+                        <a class="dropdown-item text-dark" href="{{route('password.change')}}">Change Password</a>
                         <form method="POST" action="/logout">
                             @csrf
                             <button type="submit" class="dropdown-item">Logout</button>
@@ -327,8 +327,8 @@
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
                         class="fa-solid fa-ellipsis-vertical"></i></a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#">My Profile</a>
-                    <a class="dropdown-item" href="#">Settings</a>
+                    <a class="dropdown-item text-dark" href="#">My Profile</a>
+                    <a class="dropdown-item text-dark" href="{{route('password.change')}}">Change Password</a>
                     <form method="POST" action="/logout">
                         @csrf
                         <button type="submit" class="dropdown-item">Logout</button>

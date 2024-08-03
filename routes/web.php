@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::post('/save-details', [DashboardController::class, 'details'])->middleware(['auth', 'verified'])->name('details.store');
+Route::get('/change-password', [DashboardController::class, 'changepassword'])->middleware(['auth', 'verified'])->name('password.change');
+Route::post('/change-password', [DashboardController::class, 'storepassword'])->middleware(['auth', 'verified'])->name('password.change.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -24,6 +26,7 @@ Route::group(['prefix' => 'dashboard/admin', 'middleware' => ['auth', 'verified'
     Route::group(['prefix' => 'users'], function(){
         Route::get('/', [ClientController::class, 'index'])->name('admin.users.index');
         Route::get('/attachments', [ClientController::class, 'attachment'])->name('admin.users.attachment');
+        Route::get('/download-attachments', [ClientController::class, 'downloadattachment'])->name('admin.users.attachment.download');
         Route::post('/add-attachments', [ClientController::class, 'add_attachment'])->name('admin.users.attachment.add');
         Route::post('/delete-attachments', [ClientController::class, 'destroy_attachment'])->name('admin.users.attachment.delete');
         Route::get('/add-users', [ClientController::class, 'create'])->name('admin.users.create');
@@ -103,8 +106,6 @@ Route::group(['prefix' => 'dashboard/user', 'middleware' => ['auth', 'verified']
     Route::group(['prefix' => 'trainer'], function(){
         Route::get('/', [TrainerController::class, 'index'])->name('');
     });
-
-
 });
 
 Route::group(['middleware' => ['role:super-admin|admin']], function() {

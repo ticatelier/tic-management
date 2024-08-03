@@ -31,7 +31,7 @@
             <form method="POST" action="{{ route('admin.trainer.assign.store') }}">
                 @csrf
                 <div class="row filter-row">
-
+                    
                     <div class="col-sm-6 col-md-3" data-select2-id="select2-data-6-jit7">
                         <div class="input-block mb-3 form-focus select-focus focused" data-select2-id="select2-data-5-083d">
                             <select name="trainer" class="select floating select2-hidden-accessible"

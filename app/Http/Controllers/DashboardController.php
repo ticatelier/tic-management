@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Detail;
 use Illuminate\Support\Facades\Hash;
+use Alert;
 
 class DashboardController extends Controller
 {
@@ -51,7 +52,38 @@ class DashboardController extends Controller
             'phone' => $request->phone,
             'zipcode' => $request->zipcode,
         ]);
-
+        
+        Alert::success('Successful', 'Details Updated Successfully');
         return redirect()->intended(route('dashboard', absolute: false));
+    }
+
+    public function changepassword(){
+        return view('changepassword');
+    }
+
+    public function storepassword(Request $request){
+        $request->validate([
+            'oldpassword' => 'required',
+            'newpassword' => 'required'
+        ]);
+
+        $oldPassword = User::where('id', $request->id)->first()->password;
+
+        if (Hash::check($request->oldpassword, $oldPassword)) {
+            if(Hash::check($request->newpassword, $oldPassword)) {
+                Alert::error('Error', 'New Password same as Old Password');
+                return redirect()->back();
+            }
+            $password = bcrypt($request->newpassword);
+            User::where('id', $request->id)
+                ->update([
+                    'password' => $password
+            ]);
+
+            Alert::success('Successful','Password Updated Successfully');
+            return redirect()->intended(route('dashboard', absolute: false));
+        }
+        Alert::error('Error', 'Wrong Old Password entered');
+        return redirect()->back();
     }
 }

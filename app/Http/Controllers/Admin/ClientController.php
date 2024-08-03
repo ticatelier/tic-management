@@ -11,6 +11,7 @@ use App\Models\ServiceType;
 use App\Models\ClientSubscription;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 use Alert;
 use Carbon\Carbon;
 
@@ -182,6 +183,11 @@ class ClientController extends Controller
         return redirect()->back();
     }
 
+    public function downloadattachment(Request $request){
+        $path = ClientFile::where("id", $request->vim)->first()->path;
+        return Response::download('attachments/participants/'.$path);
+      }
+
     public function destroy_attachment(Request $request)
     {
         $id = $request->vim;
@@ -232,7 +238,7 @@ class ClientController extends Controller
             return redirect()->back();
         }
         $request->validate([
-            'posnumber' => 'unique:client_subscriptions|required|digits|regex:/^(\d{8})$/',
+            'posnumber' => 'unique:client_subscriptions|required|numeric|regex:/^(\d{8})$/',
             'user' => 'required',
             'startdate' => 'required',
             'service' => 'required',

@@ -74,11 +74,21 @@
                                             @endif
                                         </div>
 
+                                        <form action="{{route('admin.users.attachment.download')}}" method="get">
+                                            @csrf
+                                            <div class="row justify-content-center" style="padding: 10px 10px;">
+                                                <input type="hidden" name="vim" value="{{$item->id}}">
+                                                <button type="submit" class="btn btn-info" style="width: 120px">
+                                                    <i class="fa-solid fa-arrow-down"></i> Download
+                                                </button>
+                                            </div>
+                                        </form>
+
                                         <form action="{{route('admin.users.attachment.delete')}}" method="post">
                                             @csrf
                                             <div class="row justify-content-center" style="padding: 10px 10px;">
                                                 <input type="hidden" name="vim" value="{{$item->id}}">
-                                                <button type="submit" class="btn btn-danger" style="width: 100px">
+                                                <button type="submit" class="btn btn-danger" style="width: 120px">
                                                     <i class="fa-solid fa-trash"></i> Delete
                                                 </button>
                                             </div>
