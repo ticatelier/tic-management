@@ -132,7 +132,7 @@ class ServiceNoteController extends Controller
             'name' => $user->name,
             'trainer' => $trainer,
             'client' => $client,
-            'time' => Carbon::parse($time)->format('m-d-Y H:m'),
+            'time' => Carbon::parse($time)->format('m-d-Y H:m')
         ]));
 
         Alert::success('Successful', 'Service note has be added successfully');
