@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Alert;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NoteNotify;
 
 class ServiceNoteController extends Controller
 {
@@ -104,7 +106,7 @@ class ServiceNoteController extends Controller
         )->first();
 
 
-        ServiceNote::create([
+        $service = ServiceNote::create([
             'client_id' => $request->client,
             'trainer_id' => Auth::id(),
             'client_subscription_id' => $sub->id,
@@ -121,6 +123,17 @@ class ServiceNoteController extends Controller
             'day' => $day,
             'year' => $year,
         ]);
+
+        $user = User::where('role', 'superadmin')->first();
+        $trainer = User::where('id', Auth::id())->first()->name;
+        $client = User::where('id', $request->client)->first()->name;
+        $time = $service->created_at;
+        Mail::to($user->email)->send(new NoteNotify([
+            'name' => $user->name,
+            'trainer' => $trainer,
+            'client' => $client,
+            'time' => Carbon::parse($time)->format('m-d-Y H:m'),
+        ]));
 
         Alert::success('Successful', 'Service note has be added successfully');
         return redirect()->intended(route('trainer.clients.index'));
