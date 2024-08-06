@@ -43,7 +43,12 @@ class AdminController extends Controller
             Alert::error('Access Denied', 'You are trespassing and going beyond limits');
             return redirect()->back();
         }
-        $all = User::where('role', 'admin')->orWhere('role', 'superadmin')->get();
+        $role = User::find(Auth::id())->first()->role;
+        if($role == 'superadmin'){
+            $all = User::where('role', 'admin')->orWhere('role', 'superadmin')->get();
+        }else{
+            $all = User::where('role', 'admin')->get();
+        }
         return view('admin.administrators.index', ['all' => $all]);
     }
 

@@ -98,6 +98,12 @@
                                     </div>
                                 </div>
 
+                                {{-- <div class="input-block mb-3 row">
+                                    <label class="col-form-label col-md-2">Attachments {Max: 10 files}</label>
+                                    <div class="col-md-10">
+                                        <input class="form-control" type="file" name="attachments[]" multiple>
+                                    </div>
+                                </div> --}}
 
                                 <div class="col-auto float-end ms-auto">
                                     <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#add_trainer"><i

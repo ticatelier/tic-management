@@ -23,7 +23,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::group(['prefix' => 'dashboard/admin', 'middleware' => ['auth', 'verified']], function () {
-    Route::group(['prefix' => 'users'], function(){
+    Route::group(['prefix' => 'participants'], function(){
         Route::get('/', [ClientController::class, 'index'])->name('admin.users.index');
         Route::get('/attachments', [ClientController::class, 'attachment'])->name('admin.users.attachment');
         Route::get('/download-attachments', [ClientController::class, 'downloadattachment'])->name('admin.users.attachment.download');
@@ -34,6 +34,10 @@ Route::group(['prefix' => 'dashboard/admin', 'middleware' => ['auth', 'verified'
         Route::get('/subscriptions', [ClientController::class, 'subscription'])->name('admin.users.subscription');
         Route::get('/expiring', [ClientController::class, 'expiringPOS'])->name('admin.users.expiring');
         Route::get('/add-subscriptions', [ClientController::class, 'addsubscription'])->name('admin.users.subscription.add');
+        Route::get('/attachment-subscriptions', [ClientController::class, 'posattachment'])->name('admin.users.subscription.attachment');
+        Route::get('/download-attachment-subscriptions', [ClientController::class, 'downloadposattachment'])->name('admin.users.subscription.attachment.download');
+        Route::post('/add-attachment-subscriptions', [ClientController::class, 'add_posattachment'])->name('admin.users.subscription.attachment.add');
+        Route::post('/delete-attachment-subscriptions', [ClientController::class, 'destroy-posattachment'])->name('admin.users.subscription.attachment.delete');
         Route::post('/add-subscriptions', [ClientController::class, 'storesubscription'])->name('admin.users.subscription.store');
         Route::post('/delete-subscriptions', [ClientController::class, 'destroysubscription'])->name('admin.users.subscription.destroy');
         Route::get('/edit-users', [ClientController::class, 'edit'])->name('admin.users.edit');

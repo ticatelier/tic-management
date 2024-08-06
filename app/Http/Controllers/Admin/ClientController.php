@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Detail;
 use App\Models\ClientFile;
+use App\Models\PosAttachment;
 use App\Models\ServiceType;
 use App\Models\ClientSubscription;
 use Illuminate\Support\Facades\Hash;
@@ -248,7 +249,7 @@ class ClientController extends Controller
         $user = ClientSubscription::where('user_id', $request->user)->first();
 
         if($user != null){
-            ClientSubscription::where('user_id', $request->user)
+            $client = ClientSubscription::where('user_id', $request->user)
                 ->update([
                     'posnumber' => $request->posnumber,
                     'startdate' => $request->startdate,
@@ -260,7 +261,7 @@ class ClientController extends Controller
                 Alert::error('No Service Type', 'No current service type for selected participant');
                 return redirect()->back();
             }
-            ClientSubscription::create([
+            $client = ClientSubscription::create([
                 'posnumber' => $request->posnumber,
                 'startdate' => $request->startdate,
                 'duedate' => $request->duedate,
@@ -272,7 +273,69 @@ class ClientController extends Controller
 
         $user = ClientSubscription::where('user_id', $request->user)->first();
 
+        $attachmentData = [];
+        if($files = $request->file('attachments')){
+            foreach($files as $key => $file){
+                $extension = $file->getClientOriginalExtension();
+                $filename = $key."-".time().".".$extension;
+
+                $path = "attachments/pos/";
+                $file->move($path, $filename);
+
+                $attachmentData[] = [
+                    'client_subscription_id' => $client->id,
+                    'path' => $filename
+                ];
+            }
+        }
+        PosAttachment::insert($attachmentData);
+
         Alert::success('Successful', $request->posnumber.' has be added successfully to '.$user->user->name);
+        return redirect()->back();
+    }
+
+    public function posattachment(Request $request)
+    {
+        $client = ClientSubscription::where('id', $request->vim)->first();
+        return view('admin.clients.posattachment', ['client' => $client]);
+    }
+
+    public function add_posattachment(Request $request)
+    {
+        $request->validate([
+            'attachments' => 'required'
+        ]);
+        $attachmentData = [];
+        if($files = $request->file('attachments')){
+            foreach($files as $key => $file){
+                $extension = $file->getClientOriginalExtension();
+                $filename = $key."-".time().".".$extension;
+
+                $path = "attachments/pos/";
+                $file->move($path, $filename);
+
+                $attachmentData[] = [
+                    'client_subscription_id' => $request->id,
+                    'path' => $filename
+                ];
+            }
+        }
+        PosAttachment::insert($attachmentData);
+
+        Alert::success('Successful', 'Attachments added successfully');
+        return redirect()->back();
+    }
+
+    public function downloadposattachment(Request $request){
+        $path = PosAttachment::where("id", $request->vim)->first()->path;
+        return Response::download('attachments/pos/'.$path);
+      }
+
+    public function destroy_posattachment(Request $request)
+    {
+        $id = $request->vim;
+        PosAttachment::where('id', $id)->delete();
+        Alert::success('Deleted', 'Deleted Successfully');
         return redirect()->back();
     }
 

@@ -119,6 +119,13 @@
                                                                 data-bs-toggle="dropdown" aria-expanded="false"><i
                                                                     class="material-icons">more_vert</i></a>
                                                             <div class="dropdown-menu dropdown-menu-right">
+                                                                <form action="{{ route('admin.users.subscription.attachment') }}">
+                                                                    @csrf
+                                                                    <input type="text" name="vim" value="{{ $user->id }}" hidden>
+                                                                    <button class="dropdown-item" href="#"
+                                                                        data-bs-toggle="modal" data-bs-target="#edit_type"><i
+                                                                            class="fa-solid fa-paperclip m-r-5"></i> Add Attachments</button>
+                                                                </form>
                                                                 <form action="{{ route('admin.users.subscription.destroy') }}" method="POST">
                                                                     @csrf
                                                                     <input type="text" name="vim" value="{{ $user->id }}" hidden>
