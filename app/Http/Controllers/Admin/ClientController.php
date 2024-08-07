@@ -174,7 +174,8 @@ class ClientController extends Controller
 
                 $attachmentData[] = [
                     'user_id' => $request->id,
-                    'path' => $filename
+                    'path' => $filename,
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s')
                 ];
             }
         }
@@ -284,7 +285,8 @@ class ClientController extends Controller
 
                 $attachmentData[] = [
                     'client_subscription_id' => $client->id,
-                    'path' => $filename
+                    'path' => $filename,
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s')
                 ];
             }
         }
@@ -297,7 +299,8 @@ class ClientController extends Controller
     public function posattachment(Request $request)
     {
         $client = ClientSubscription::where('id', $request->vim)->first();
-        return view('admin.clients.posattachment', ['client' => $client]);
+        $posAttach = PosAttachment::where('client_subscription_id', $client->id)->latest()->get();
+        return view('admin.clients.posattachment', ['client' => $client, 'posAttach'=> $posAttach]);
     }
 
     public function add_posattachment(Request $request)
@@ -307,16 +310,17 @@ class ClientController extends Controller
         ]);
         $attachmentData = [];
         if($files = $request->file('attachments')){
-            foreach($files as $key => $file){
+            foreach($files as $file){
                 $extension = $file->getClientOriginalExtension();
-                $filename = $key."-".time().".".$extension;
+                $filename = $file->getClientOriginalName().".".$extension;
 
                 $path = "attachments/pos/";
                 $file->move($path, $filename);
 
                 $attachmentData[] = [
                     'client_subscription_id' => $request->id,
-                    'path' => $filename
+                    'path' => $filename,
+                    'created_at' => Carbon::now()->format('Y-m-d H:i:s')
                 ];
             }
         }

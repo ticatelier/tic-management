@@ -376,7 +376,6 @@
                                         <tr>
                                             <th>Service Options</th>
                                             <th>Service Type</th>
-                                            <th>Rate ($)</th>
                                             <th>Hours</th>
                                     </thead>
                                     <tbody>
@@ -389,7 +388,6 @@
                                                 <td>
                                                     <h2><a href="#">{{ $item->service->type }}</a></h2>
                                                 </td>
-                                                <td>{{ $item->rate }}</td>
                                                 <td>{{ $item->hours }}</td>
                                             </tr>
                                         @endforeach

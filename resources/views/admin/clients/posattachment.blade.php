@@ -63,7 +63,7 @@
                         <div class="card-body">
                             <div class="row">
                                 {{-- {{ $client->attachment }} --}}
-                                @foreach ($client->attachment as $item)
+                                @foreach ($posAttach as $item)
                                     <div class="col-md-3 col-sm-6">
                                         <p class="text-center">{{$item->path}}</p>
                                         <div class="row flex justify-content-center">
