@@ -311,8 +311,8 @@ class ClientController extends Controller
         $attachmentData = [];
         if($files = $request->file('attachments')){
             foreach($files as $file){
-                $extension = $file->getClientOriginalExtension();
-                $filename = $file->getClientOriginalName().".".$extension;
+                // $extension = $file->getClientOriginalExtension();
+                $filename = $file->getClientOriginalName();
 
                 $path = "attachments/pos/";
                 $file->move($path, $filename);
