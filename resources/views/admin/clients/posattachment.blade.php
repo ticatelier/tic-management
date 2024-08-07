@@ -29,7 +29,8 @@
                 <div class="col-lg-10">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title mb-0 text-center">{{$client->name}}</h4>
+                            <h4 class="card-title mb-0 text-center">{{$client->user->name}} POS Documents</h4>
+                            <p class="mb-0 text-center">Active POS Number : {{$client->posnumber}}</p>
                         </div>
                         <div class="card-body">
                             @if($errors)
