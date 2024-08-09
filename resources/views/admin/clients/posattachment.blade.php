@@ -69,7 +69,7 @@
                                         <p class="text-center">{{$item->path}}</p>
                                         <div class="row flex justify-content-center">
                                             @if(str_contains(strtolower($item->path), 'jpg') || str_contains(strtolower($item->path), 'png') || str_contains(strtolower($item->path), 'jpeg') || str_contains(strtolower($item->path), 'webp'))
-                                                <img id="attached" src="{{asset('attachments/pos/'.$item->path)}}" alt="File Img" style="width: 200px; height: 200px">
+                                                <img id="attached" src="{{asset('attachments/pos/'.$client->id."/".$item->path)}}" alt="File Img" style="width: 200px; height: 200px">
                                             @else
                                                 <img id="attached" src="{{asset('attachments/file.png')}}" alt="File Img" style="width: 200px; height: 200px">
                                             @endif

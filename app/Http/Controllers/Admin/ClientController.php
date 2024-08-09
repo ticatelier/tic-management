@@ -96,7 +96,7 @@ class ClientController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $filename = $key."-".time().".".$extension;
 
-                $path = "attachments/participants/";
+                $path = "attachments/participants/".$user->id."/";
                 $file->move($path, $filename);
 
                 $attachmentData[] = [
@@ -169,7 +169,7 @@ class ClientController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $filename = $key."-".time().".".$extension;
 
-                $path = "attachments/participants/";
+                $path = "attachments/participants/".$request->id."/";
                 $file->move($path, $filename);
 
                 $attachmentData[] = [
@@ -186,8 +186,8 @@ class ClientController extends Controller
     }
 
     public function downloadattachment(Request $request){
-        $path = ClientFile::where("id", $request->vim)->first()->path;
-        return Response::download('attachments/participants/'.$path);
+        $path = ClientFile::where("id", $request->vim)->first();
+        return Response::download('attachments/participants/'.$path->user_id."/".$path->path);
       }
 
     public function destroy_attachment(Request $request)
@@ -314,7 +314,16 @@ class ClientController extends Controller
                 // $extension = $file->getClientOriginalExtension();
                 $filename = $file->getClientOriginalName();
 
-                $path = "attachments/pos/";
+                $check = PosAttachment::where(['path' => $filename, 'client_subscription_id' => $request->id])->first();
+
+                if($check != null){
+                    Alert::error('Duplicate File Name', 'An existing file has the same name');
+                    return redirect()->back();
+                }
+
+                $user_id = ClientSubscription::where('id', $request->id)->first()->user_id;
+
+                $path = "attachments/pos/".$user_id."/";
                 $file->move($path, $filename);
 
                 $attachmentData[] = [
@@ -331,8 +340,8 @@ class ClientController extends Controller
     }
 
     public function downloadposattachment(Request $request){
-        $path = PosAttachment::where("id", $request->vim)->first()->path;
-        return Response::download('attachments/pos/'.$path);
+        $path = PosAttachment::where("id", $request->vim)->first();
+        return Response::download('attachments/pos/'.$path->subscription->user_id."/".$path->path);
       }
 
     public function destroy_posattachment(Request $request)

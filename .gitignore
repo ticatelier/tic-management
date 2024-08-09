@@ -3,6 +3,8 @@
 /public/build
 /public/hot
 /public/storage
+/public/attachments/participants
+/public/attachments/pos
 /storage/*.key
 /vendor
 .env
