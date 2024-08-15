@@ -124,6 +124,7 @@
                                                                     data-bs-toggle="dropdown" aria-expanded="false"><i
                                                                         class="material-icons">more_vert</i></a>
                                                                 <div class="dropdown-menu dropdown-menu-right">
+                                                                    <a class="dropdown-item" href="{{ url('admin/'.$user->id.'/give-permissions') }}"><i class="fa fa-sliders m-r-5"></i> Permissions</a>
                                                                     <form
                                                                         action="{{ route('admin.administrators.edit') }}">
                                                                         @csrf

@@ -21,11 +21,12 @@ class ClientController extends Controller
     public function __construct()
     {
         $this->middleware('permission:view user', ['only' => ['index']]);
-        $this->middleware('permission:create user', ['only' => ['create','store']]);
+        $this->middleware('permission:create user', ['only' => ['create','store', 'attachment', 'add_attachment', 'downloadattachment', 'destroy_attachment']]);
         $this->middleware('permission:update user', ['only' => ['update','edit']]);
         $this->middleware('permission:delete user', ['only' => ['destroy']]);
         $this->middleware('permission:view pos number', ['only' => ['subscription', 'expiringPOS']]);
         $this->middleware('permission:create pos number', ['only' => ['addsubcription','storesubscription']]);
+        $this->middleware('permission:pos document', ['only' => ['posattachment','add_posattachment', 'downloadposattachment', 'destroy_posattachment']]);
     }
 
     private function access(){

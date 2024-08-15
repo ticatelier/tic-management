@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
@@ -94,6 +95,27 @@ class RoleController extends Controller
         ]);
     }
 
+    public function addPermissionToUser($userId)
+    {
+        $permissions = Permission::get();
+        $user = User::findOrFail($userId);
+        $role = Role::where('name', $user->role)->first();
+        $Permission = $user->getAllPermissions();
+        $rolePermissions = [];
+        foreach($Permission as $item){
+            $rolePermissions[] = $item->id;
+        }
+
+        // dd($rolePermissions);
+
+        return view('admin.administrators.roles.user-permissions', [
+            'role' => $role,
+            'user' => $user,
+            'permissions' => $permissions,
+            'rolePermissions' => $rolePermissions
+        ]);
+    }
+
     public function givePermissionToRole(Request $request)
     {
         $request->validate([
@@ -104,5 +126,17 @@ class RoleController extends Controller
         $role->syncPermissions($request->permission);
 
         return redirect()->back()->with('status','Permissions added to role');
+    }
+
+    public function givePermissionToUser(Request $request)
+    {
+        $request->validate([
+            'permission' => 'required'
+        ]);
+
+        $role = User::findOrFail($request->id);
+        $role->syncPermissions($request->permission);
+
+        return redirect()->back()->with('status','Permissions added to user');
     }
 }

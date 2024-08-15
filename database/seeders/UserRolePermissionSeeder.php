@@ -29,6 +29,7 @@ class UserRolePermissionSeeder extends Seeder
 
         Permission::create(['name' => 'view user']);
         Permission::create(['name' => 'create user']);
+        Permission::create(['name' => 'user document']);
         Permission::create(['name' => 'update user']);
         Permission::create(['name' => 'delete user']);
 
@@ -45,6 +46,7 @@ class UserRolePermissionSeeder extends Seeder
 
         Permission::create(['name' => 'view pos number']);
         Permission::create(['name' => 'create pos number']);
+        Permission::create(['name' => 'pos document']);
         Permission::create(['name' => 'update pos number']);
         Permission::create(['name' => 'delete pos number']);
 

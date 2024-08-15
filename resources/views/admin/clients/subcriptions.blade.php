@@ -124,7 +124,7 @@
                                                                     <input type="text" name="vim" value="{{ $user->id }}" hidden>
                                                                     <button class="dropdown-item" href="#"
                                                                         data-bs-toggle="modal" data-bs-target="#edit_type"><i
-                                                                            class="fa-solid fa-paperclip m-r-5"></i> Add Attachments</button>
+                                                                            class="fa-solid fa-paperclip m-r-5"></i> Add POS Documents</button>
                                                                 </form>
                                                                 <form action="{{ route('admin.users.subscription.destroy') }}" method="POST">
                                                                     @csrf

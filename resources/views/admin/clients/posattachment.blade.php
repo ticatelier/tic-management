@@ -59,7 +59,7 @@
                 <div class="col-lg-10">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title mb-0">View Attachments</h4>
+                            <h4 class="card-title mb-0">View POS Documents</h4>
                         </div>
                         <div class="card-body">
                             <div class="row">

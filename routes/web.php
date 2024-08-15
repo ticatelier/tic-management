@@ -120,7 +120,10 @@ Route::group(['middleware' => ['role:super-admin|admin']], function() {
     Route::resource('roles', App\Http\Controllers\RoleController::class);
     Route::get('roles/{roleId}/delete', [App\Http\Controllers\RoleController::class, 'destroy']);
     Route::get('roles/{roleId}/give-permissions', [App\Http\Controllers\RoleController::class, 'addPermissionToRole']);
+    Route::get('admin/{userId}/give-permissions', [App\Http\Controllers\RoleController::class, 'addPermissionToUser']);
     Route::post('roles/give-permissions/add', [App\Http\Controllers\RoleController::class, 'givePermissionToRole']);
+
+    Route::post('admin/give-permissions/add', [App\Http\Controllers\RoleController::class, 'givePermissionToUser']);
 
 
 });
