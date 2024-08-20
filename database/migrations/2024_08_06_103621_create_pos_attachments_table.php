@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('client_subscription_id')->unsigned();
             $table->foreign('client_subscription_id')->references('id')->on('client_subscriptions')->onDelete('cascade');
+            $table->string('type')->nullable();
             $table->string('path')->nullable();
             $table->timestamps();
         });

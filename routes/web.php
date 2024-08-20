@@ -37,6 +37,7 @@ Route::group(['prefix' => 'dashboard/admin', 'middleware' => ['auth', 'verified'
         Route::get('/attachment-subscriptions', [ClientController::class, 'posattachment'])->name('admin.users.subscription.attachment');
         Route::get('/download-attachment-subscriptions', [ClientController::class, 'downloadposattachment'])->name('admin.users.subscription.attachment.download');
         Route::post('/add-attachment-subscriptions', [ClientController::class, 'add_posattachment'])->name('admin.users.subscription.attachment.add');
+        Route::get('/query-attachment-subscriptions', [ClientController::class, 'query_posattachment'])->name('admin.users.subscription.attachment.query');
         Route::post('/delete-attachment-subscriptions', [ClientController::class, 'destroy_posattachment'])->name('admin.users.subscription.attachment.delete');
         Route::post('/add-subscriptions', [ClientController::class, 'storesubscription'])->name('admin.users.subscription.store');
         Route::post('/delete-subscriptions', [ClientController::class, 'destroysubscription'])->name('admin.users.subscription.destroy');

@@ -13,6 +13,7 @@ class PosAttachment extends Model
 
     protected $fillable = [
         'client_subscription_id',
+        'type',
         'path'
     ];
 

@@ -301,13 +301,30 @@ class ClientController extends Controller
     {
         $client = ClientSubscription::where('id', $request->vim)->first();
         $posAttach = PosAttachment::where('client_subscription_id', $client->id)->latest()->get();
-        return view('admin.clients.posattachment', ['client' => $client, 'posAttach'=> $posAttach]);
+        $type = "All";
+        return view('admin.clients.posattachment', ['client' => $client, 'posAttach'=> $posAttach, 'type' => $type]);
+    }
+
+    public function query_posattachment(Request $request)
+    {
+        $client = ClientSubscription::where('id', $request->vim)->first();
+        if($request->type == "All" || $request->type == ""){
+            $posAttach = PosAttachment::where('client_subscription_id', $client->id)->latest()->get();
+        }else{
+            $posAttach = PosAttachment::where([
+                'client_subscription_id' => $client->id,
+                'type' => $request->type,
+                ])->latest()->get();
+        }
+        $type = $request->type;
+        return view('admin.clients.posattachment', ['client' => $client, 'posAttach'=> $posAttach, 'type' => $type]);
     }
 
     public function add_posattachment(Request $request)
     {
         $request->validate([
-            'attachments' => 'required'
+            'attachments' => 'required',
+            'type' => 'required',
         ]);
         $attachmentData = [];
         if($files = $request->file('attachments')){
@@ -329,6 +346,7 @@ class ClientController extends Controller
 
                 $attachmentData[] = [
                     'client_subscription_id' => $request->id,
+                    'type' => $request->type,
                     'path' => $filename,
                     'created_at' => Carbon::now()->format('Y-m-d H:i:s')
                 ];
