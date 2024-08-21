@@ -91,22 +91,29 @@ class ClientController extends Controller
             'user_id' => $user->id
         ]);
 
-        $attachmentData = [];
-        if($files = $request->file('attachments')){
-            foreach($files as $key => $file){
-                $extension = $file->getClientOriginalExtension();
-                $filename = $key."-".time().".".$extension;
+        // $attachmentData = [];
+        // if($files = $request->file('attachments')){
+        //     foreach($files as $key => $file){
+        //         $filename = $file->getClientOriginalName();
 
-                $path = "attachments/participants/".$user->id."/";
-                $file->move($path, $filename);
+        //         $check = ClientFile::where(['path' => $filename, 'user_id' => $user->id])->first();
 
-                $attachmentData[] = [
-                    'user_id' => $user->id,
-                    'path' => $filename
-                ];
-            }
-        }
-        ClientFile::insert($attachmentData);
+        //         if($check != null){
+        //             Alert::error('Duplicate File Name', 'An existing file has the same name. User has been registered');
+        //             return redirect()->back();
+        //         }
+        //         $path = "attachments/participants/".$user->id."/";
+        //         $file->move($path, $filename);
+
+        //         $attachmentData[] = [
+        //             'user_id' => $user->id,
+        //             'type'=> $request->type,
+        //             'path' => $filename,
+        //             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        //         ];
+        //     }
+        // }
+        // ClientFile::insert($attachmentData);
 
         Alert::success('Successful', $request->name.' has be registered successfully');
         return redirect()->back();
@@ -156,25 +163,53 @@ class ClientController extends Controller
     public function attachment(Request $request)
     {
         $client = User::where('id', $request->vim)->first();
-        return view('admin.clients.attachment', ['client' => $client]);
+        $attachment = ClientFile::where('user_id', $client->id)->latest()->get();
+        $type = "All";
+        return view('admin.clients.attachment', ['client' => $client, 'attachment'=> $attachment, 'type' => $type]);
     }
+
+    public function query_attachment(Request $request)
+    {
+        $client = User::where('id', $request->vim)->first();
+        if($request->type == "All" || $request->type == ""){
+            $attachment = ClientFile::where('user_id', $client->id)->latest()->get();
+        }else{
+            $attachment = ClientFile::where([
+                'user_id' => $client->id,
+                'type' => $request->type,
+                ])->latest()->get();
+        }
+        $type = $request->type;
+        return view('admin.clients.attachment', ['client' => $client, 'attachment'=> $attachment, 'type' => $type]);
+    }
+
 
     public function add_attachment(Request $request)
     {
         $request->validate([
-            'attachments' => 'required'
+            'attachments' => 'required',
+            'type' => 'required',
         ]);
         $attachmentData = [];
         if($files = $request->file('attachments')){
             foreach($files as $key => $file){
-                $extension = $file->getClientOriginalExtension();
-                $filename = $key."-".time().".".$extension;
+                // $extension = $file->getClientOriginalExtension();
+                // $filename = $key."-".time().".".$extension;
+                $filename = $file->getClientOriginalName();
+
+                $check = ClientFile::where(['path' => $filename, 'user_id' => $request->id])->first();
+
+                if($check != null){
+                    Alert::error('Duplicate File Name', 'An existing file has the same name');
+                    return redirect()->back();
+                }
 
                 $path = "attachments/participants/".$request->id."/";
                 $file->move($path, $filename);
 
                 $attachmentData[] = [
                     'user_id' => $request->id,
+                    'type'=> $request->type,
                     'path' => $filename,
                     'created_at' => Carbon::now()->format('Y-m-d H:i:s')
                 ];
@@ -305,26 +340,10 @@ class ClientController extends Controller
         return view('admin.clients.posattachment', ['client' => $client, 'posAttach'=> $posAttach, 'type' => $type]);
     }
 
-    public function query_posattachment(Request $request)
-    {
-        $client = ClientSubscription::where('id', $request->vim)->first();
-        if($request->type == "All" || $request->type == ""){
-            $posAttach = PosAttachment::where('client_subscription_id', $client->id)->latest()->get();
-        }else{
-            $posAttach = PosAttachment::where([
-                'client_subscription_id' => $client->id,
-                'type' => $request->type,
-                ])->latest()->get();
-        }
-        $type = $request->type;
-        return view('admin.clients.posattachment', ['client' => $client, 'posAttach'=> $posAttach, 'type' => $type]);
-    }
-
     public function add_posattachment(Request $request)
     {
         $request->validate([
-            'attachments' => 'required',
-            'type' => 'required',
+            'attachments' => 'required'
         ]);
         $attachmentData = [];
         if($files = $request->file('attachments')){
@@ -346,7 +365,6 @@ class ClientController extends Controller
 
                 $attachmentData[] = [
                     'client_subscription_id' => $request->id,
-                    'type' => $request->type,
                     'path' => $filename,
                     'created_at' => Carbon::now()->format('Y-m-d H:i:s')
                 ];

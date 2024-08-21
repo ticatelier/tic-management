@@ -42,25 +42,7 @@
                                 @csrf
 
                                 <input type="hidden" name="id" value="{{ $client->id }}">
-                                <div class="input-block mb-3 row">
-                                    <label class="col-form-label col-md-2">File Type</label>
-                                    <div class="col-md-8">
-                                        <select name="type" class="form-control form-select">
-                                            <option value="" selected disabled>-- Select --</option>
-                                            <option>Service Type</option>
-                                            <option>Face Sheet</option>
-                                            <option>Admission Agreement</option>
-                                            <option>Copy of ID</option>
-                                            <option>Copy of Social</option>
-                                            <option>Current Progress Report</option>
-                                            <option>Latest C.D.E.R</option>
-                                            <option>Psych Evaluation</option>
-                                            <option>Latest IPP</option>
-                                            <option>Leasing Contracts</option>
-                                            <option>ID Notes</option>
-                                        </select>
-                                    </div>
-                                </div>
+                                
                                 <div class="input-block mb-3 row">
                                     <label class="col-form-label col-md-2">Attachments {Max: 10 files}</label>
                                     <div class="col-md-8">
@@ -79,43 +61,9 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title mb-0">View POS Documents</h4>
-                            <h4 class="mb-0 text-center">{{ $type }} Documents</h4>
                         </div>
                         <div class="card-body">
-                            <div class="row mb-3 d-flex" style="width: 100%; justify-content: center;">
-                                <div>
-                                    <form action="{{ route('admin.users.subscription.attachment.query') }}" method="get">
-                                        <input type="hidden" name="vim" value="{{ $client->id }}">
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="col-md-8">
-                                                    <select name="type" class="form-control form-select">
-                                                        <option value="" selected disabled>-- Select File Type --
-                                                        </option>
-                                                        <option>All</option>
-                                                        <option>Service Type</option>
-                                                        <option>Face Sheet</option>
-                                                        <option>Admission Agreement</option>
-                                                        <option>Copy of ID</option>
-                                                        <option>Copy of Social</option>
-                                                        <option>Current Progress Report</option>
-                                                        <option>Latest C.D.E.R</option>
-                                                        <option>Psych Evaluation</option>
-                                                        <option>Latest IPP</option>
-                                                        <option>Leasing Contracts</option>
-                                                        <option>ID Notes</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <button class="form-control btn btn-info" data-bs-toggle="modal"
-                                                        data-bs-target="#add_trainer"><i class="fa-solid fa-plus"></i>
-                                                        Add</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+                            
                             <div class="row">
                                 {{-- {{ $client->attachment }} --}}
                                 @foreach ($posAttach as $item)
