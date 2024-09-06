@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-layout="horizontal" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-layout-mode="orange" data-layout-width="fluid" data-layout-position="fixed" data-layout-style="default" data-select2-id="37">
+<html lang="en" data-layout="horizontal" data-topbar="dark" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-layout-mode="blue" data-layout-width="fluid" data-layout-position="fixed" data-layout-style="default" data-select2-id="37">
 
 <head>
     <meta charset="utf-8">
@@ -70,7 +70,7 @@
                                 </div>
                             </div>
                             <div class="input-block mb-4 text-center">
-                                <button class="btn btn-primary account-btn" type="submit">Login</button>
+                                <button class="btn btn-info account-btn" type="submit">Login</button>
                             </div>
 
                         </form>

@@ -21,11 +21,9 @@ class ServiceNote extends Model
         'timeout',
         'daily_hour',
         'Location',
-        'medadmin',
-        'medchanges',
-        'categories',
-        'behaviour',
-        'activities'
+        'classes_taught',
+        'report',
+        'remark'
     ];
 
     public function client(): BelongsTo

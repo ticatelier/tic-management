@@ -26,11 +26,9 @@ return new class extends Migration
             $table->string('day')->nullable();
             $table->string('month')->nullable();
             $table->string('year')->nullable();
-            $table->string('medadmin')->nullable();
-            $table->json('categories')->nullable();
-            $table->longText('medchanges')->nullable();
-            $table->longText('behaviour')->nullable();
-            $table->longText('activities')->nullable();
+            $table->longText('classes_taught')->nullable();
+            $table->longText('report')->nullable();
+            $table->longText('remark')->nullable();
             $table->timestamps();
         });
     }

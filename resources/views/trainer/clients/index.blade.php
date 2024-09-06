@@ -19,10 +19,10 @@
                             <li class="breadcrumb-item active">My Clients</li>
                         </ul>
                     </div>
-                    {{-- <div class="col-auto float-end ms-auto">
-                        <a href="{{ route('admin.users.create') }}" ><button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#add_trainer"><i
-                                class="fa-solid fa-plus"></i> Add New</button></a>
-                    </div> --}}
+                    <div class="col-auto float-end ms-auto">
+                        <a href="{{ route('dashboard') }}" ><button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#add_trainer"><i
+                                class="fa-solid fa-arrow-left"></i> Dashboard</button></a>
+                    </div>
                 </div>
             </div>
 

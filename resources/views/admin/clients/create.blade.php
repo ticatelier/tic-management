@@ -12,15 +12,15 @@
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="page-title">Participants</h3>
+                        <h3 class="page-title">Clients</h3>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Participants</li>
+                            <li class="breadcrumb-item active">Clients</li>
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
                         <a href="{{ route('admin.users.index') }}"><button class="btn btn-info" data-bs-toggle="modal"
-                                data-bs-target="#add_trainer"> View Participants</button></a>
+                                data-bs-target="#add_trainer"> View Clients</button></a>
                     </div>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title mb-0">Add Participants</h4>
+                            <h4 class="card-title mb-0">Add Clients</h4>
                         </div>
                         <div class="card-body">
                             @if($errors)

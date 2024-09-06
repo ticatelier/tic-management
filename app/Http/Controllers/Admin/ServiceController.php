@@ -227,7 +227,7 @@ class ServiceController extends Controller
         }
         $services = ServiceType::orderBy('type', 'asc')->get();
         $years = ServiceNote::distinct()->select('year')->get();
-        $months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'Semptember', 'October', 'November', 'December'];
+        $months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         return view('admin.analytics.getMonthly', ['years' => $years, 'months' => $months, 'services' => $services]);
     }
 

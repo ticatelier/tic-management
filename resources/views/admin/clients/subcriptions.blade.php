@@ -13,10 +13,10 @@
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <h3 class="page-title">Participants Subscriptions</h3>
+                        <h3 class="page-title">Clients Subscriptions</h3>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Participants Subscriptions</li>
+                            <li class="breadcrumb-item active">Clients Subscriptions</li>
                         </ul>
                     </div>
                     <div class="col-auto float-end ms-auto">
@@ -56,7 +56,7 @@
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
                                                     rowspan="1" colspan="1"
                                                     aria-label="Name : activate to sort column ascending"
-                                                    style="width: 140.922px;">Participant Name </th>
+                                                    style="width: 140.922px;">Client Name </th>
                                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
                                                     rowspan="1" colspan="1"
                                                     aria-label="Pos Number : activate to sort column ascending"

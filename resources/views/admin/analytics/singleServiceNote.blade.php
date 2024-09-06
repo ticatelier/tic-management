@@ -42,7 +42,7 @@
                                     <p>{{ $note->client->name }}</p>
                                 </div>
                                 <div class="col-4 p-2 text-right border border-secondary" style="padding: 14px 6px;">
-                                    <h4>DSP Trainer</h4>
+                                    <h4>TIC Trainer</h4>
                                     <p>{{ $note->trainer->name }}</p>
                                 </div>
                                 <div class="col-4 p-2 text-right border border-secondary" style="padding: 14px 6px;">
@@ -70,52 +70,20 @@
                                 </div>
                             </div>
                             <div class="row mb-2 border border-secondary" style="padding: 14px 6px;">
-                                @php
-                                    $categories = json_decode($note->categories);
-                                @endphp
-                                @foreach ($categories as $item)
-                                    <div class="col-md-3">
-                                        <div class="checkbox">
-                                            <label class="col-form-label">
-                                                <input
-                                                    type="checkbox"
-                                                    checked
-                                                />
-                                                {{ $item }}
-                                            </label>
-                                        </div>
-                                    </div>
-                                @endforeach
+                                <h4>Classes Taught</h4>
+                                <p>{{ $note->classes_taught }}</p>
                             </div>
 
                             <div class="row mb-2 border border-secondary" style="padding: 14px 6px;">
-                                <div class="col-md-12">
-                                    <div class="checkbox">
-                                        <label class="col-form-label">
-                                            <input
-                                                type="checkbox"
-                                                {{ $note->medadmin == "As Directed" ? 'checked':'' }}
-                                            />
-                                            <span class="h4"> Medications Administered as directed</span>
-                                        </label>
-                                    </div>
-                                </div>
+                                <h4>Report</h4>
+                                <p>{{ $note->report }}</p>
                             </div>
 
                             <div class="row mb-2 border border-secondary" style="padding: 14px 6px;">
-                                <h4>Medication Changes</h4>
-                                <p>{{ $note->medchanges }}</p>
+                                <h4>Remarks</h4>
+                                <p>{{ $note->remark }}</p>
                             </div>
 
-                            <div class="row mb-2 border border-secondary" style="padding: 14px 6px;">
-                                <h4>Behaviour Problems</h4>
-                                <p>{{ $note->behaviour }}</p>
-                            </div>
-
-                            <div class="row mb-2 border border-secondary" style="padding: 14px 6px;">
-                                <h4>Activities and Staff Communication</h4>
-                                <p>{{ $note->activities }}</p>
-                            </div>
 
                         </div>
                     </div>

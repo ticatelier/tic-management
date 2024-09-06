@@ -48,11 +48,9 @@ class ServiceNoteController extends Controller
             'timein' => 'required',
             'timeout' => 'required',
             'location' => 'required',
-            'medadmin' => 'required',
-            'medchanges' => 'required',
-            'behaviour' => 'required',
-            'activities' => 'required',
-            'categories' => 'required'
+            'classes_taught' => 'required',
+            'remark' => 'required',
+            'report' => 'required'
         ]);
 
         // check the subscription
@@ -112,12 +110,10 @@ class ServiceNoteController extends Controller
             'client_subscription_id' => $sub->id,
             'timein' => $request->timein,
             'timeout' => $request->timeout,
-            'medchanges' => $request->medchanges,
-            'medadmin' => $request->medadmin,
             'Location' => $request->location,
-            'behaviour' => $request->behaviour,
-            'activities' => $request->activities,
-            'categories' => json_encode($request->categories),
+            'classes_taught' => $request->classes_taught,
+            'report' => $request->report,
+            'remark' => $request->remark,
             'daily_hour' => $hours,
             'month' => $monthName,
             'day' => $day,

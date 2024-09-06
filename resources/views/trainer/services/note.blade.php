@@ -78,63 +78,26 @@
                                 </div>
                             </div>
 
+                            
+
                             <div class="input-block mb-3 row">
-                                <label class="col-form-label col-md-2">Medication Administered</label>
+                                <label class="col-form-label col-md-2">Classes Taught</label>
                                 <div class="col-md-10">
-                                    <select name="medadmin" class="form-control form-select">
-                                        <option selected disabled>-- Select --</option>
-                                        <option>As Directed</option>
-                                        <option>Not As Directed</option>
-                                    </select>
+                                    <textarea name="classes_taught" rows="5" cols="5" class="form-control" placeholder="Eg, Basic 1, Basic 2, Basic 3"></textarea>
                                 </div>
                             </div>
 
                             <div class="input-block mb-3 row">
-                                <label class="col-form-label col-md-2">Medication Changes</label>
+                                <label class="col-form-label col-md-2">Report</label>
                                 <div class="col-md-10">
-                                    <textarea name="medchanges" rows="5" cols="5" class="form-control" placeholder="Enter text here"></textarea>
+                                    <textarea name="report" rows="5" cols="5" class="form-control" placeholder="Enter your daily report here"></textarea>
                                 </div>
                             </div>
 
                             <div class="input-block mb-3 row">
-                                <label class="col-form-label col-md-2">Behaviour Problems</label>
+                                <label class="col-form-label col-md-2">Remarks</label>
                                 <div class="col-md-10">
-                                    <textarea name="behaviour" rows="5" cols="5" class="form-control" placeholder="Enter text here"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="input-block mb-3 row">
-                                <label class="col-form-label col-md-2">Activities and Staff Communication</label>
-                                <div class="col-md-10">
-                                    <textarea name="activities" rows="5" cols="5" class="form-control" placeholder="Enter text here"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="input-block mb-3 row">
-                                <label class="col-form-label col-md-2">Categories</label>
-                                <div class="col-md-10">
-                                    <div class="input-block mb-3 form-focus select-focus focused" data-select2-id="select2-data-5-083d">
-
-                                        <select name="categories[]" class="select floating select2-hidden-accessible" id="multiple-checkboxes"
-                                            multiple="multiple" style="height: 50px">
-
-                                            <option>Medical/Hygiene</option>
-                                            <option>Meal Planning</option>
-                                            <option>Community Safety</option>
-                                            <option>Training</option>
-                                            <option>Behaviour and Emotions</option>
-
-                                        </select>
-                                        <label class="focus-label">Select Category</label>
-                                        <span class="select2 select2-container select2-container--default select2-container--above"
-                                            dir="ltr" data-select2-id="8" style="width: 431px;"><span
-                                                class="selection"></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
-
-                                        {{-- <span
-                                            class="select2 select2-container select2-container--default select2-container--below select2-container--focus"
-                                            dir="ltr" data-select2-id="3" style="width: 100%; padding-top:8px; height:50px;"><span class="selection" style="width: 100%; padding-top:8px; height:50px;"></span><span class="dropdown-wrapper" aria-hidden="true"></span>
-                                        </span> --}}
-                                    </div>
+                                    <textarea name="remark" rows="5" cols="5" class="form-control" placeholder="Enter each remarks for each classes here"></textarea>
                                 </div>
                             </div>
 

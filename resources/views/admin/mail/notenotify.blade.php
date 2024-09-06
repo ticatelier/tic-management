@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Choice Liberation Mentoring</title>
+    <title>tic atelier</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -78,7 +78,7 @@
                     <tr>
                         <td class="footer"
                             style="background-color: #333333; padding: 40px; text-align: center; color: white; font-size: 14px;">
-                            Copyright &copy; <script>document.write(new Date().getFullYear());</script> | Choice Liberation Mentoring
+                            Copyright &copy; <script>document.write(new Date().getFullYear());</script> | tic atelier
                         </td>
                     </tr>
                 </table>

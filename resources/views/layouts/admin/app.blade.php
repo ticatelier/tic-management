@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-layout="horizontal" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-layout-mode="orange" data-layout-width="fluid" data-layout-position="fixed" data-layout-style="default" data-select2-id="37">
+<html lang="en" data-layout="horizontal" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-layout-mode="blue" data-layout-width="fluid" data-layout-position="fixed" data-layout-style="default" data-select2-id="37">
 
 <head>
     <meta charset="utf-8">
@@ -53,7 +53,7 @@
             </a>
 
             <div class="page-title-box">
-                <h3>Choice Liberation Mentoring</h3>
+                <h3>tic atelier</h3>
             </div>
 
             <a id="mobile_btn" class="mobile_btn" href="#sidebar"><i class="fa-solid fa-bars"></i></a>

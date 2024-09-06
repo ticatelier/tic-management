@@ -19,7 +19,7 @@
                     </div>
                     <div class="col-auto float-end ms-auto">
                         <a href="{{ route('admin.users.subscription') }}"><button class="btn btn-info"
-                                data-bs-toggle="modal" data-bs-target="#add_trainer"> View Participants</button></a>
+                                data-bs-toggle="modal" data-bs-target="#add_trainer"> View Clients</button></a>
                     </div>
                 </div>
             </div>

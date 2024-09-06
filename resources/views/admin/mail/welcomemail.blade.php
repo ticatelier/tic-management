@@ -47,7 +47,7 @@
                     <tr>
                         <td class="body" style="padding: 40px; text-align: left; font-size: 16px; line-height: 1.6;">
                             Hello, {{ $mailData['name'] }} <br>
-                            Welcome to Choice Liberation Mentoring.
+                            Welcome to tic atelier.
                             <br><br>
                             Your default password is
                             @if($mailData['role'] == 'admin')
@@ -84,7 +84,7 @@
                     <tr>
                         <td class="footer"
                             style="background-color: #333333; padding: 40px; text-align: center; color: white; font-size: 14px;">
-                            Copyright &copy; <script>document.write(new Date().getFullYear());</script> | Choice Liberation Mentoring
+                            Copyright &copy; <script>document.write(new Date().getFullYear());</script> | tic atelier
                         </td>
                     </tr>
                 </table>
