@@ -33,7 +33,7 @@
                                 <img src="{{ asset('assets/img/logo2.jpg')}}" alt="Logo" style="width: 230px">
                             </div>
                             <h4 class="card-title mb-0">DAILY SERVICE LOG</h4>
-                            <h5>{{ $note->day }} {{ Carbon\Carbon::parse($note->created_at)->format('d') }} {{ $note->month }}, {{ $note->year }}</h5>
+                            <h5>{{ $note->day }} {{ $note->date }} {{ $note->month }}, {{ $note->year }}</h5>
                         </div>
                         <div class="card-body" style="padding: 14px 6px;">
                             <div class="row border mb-2 border-secondary" style="padding: 14px 6px;">

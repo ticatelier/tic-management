@@ -23,6 +23,7 @@ return new class extends Migration
             $table->time('timeout')->nullable();
             $table->integer('daily_hour')->nullable();
             $table->string('Location')->nullable();
+            $table->integer('date')->nullable();
             $table->string('day')->nullable();
             $table->string('month')->nullable();
             $table->string('year')->nullable();

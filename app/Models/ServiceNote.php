@@ -14,6 +14,7 @@ class ServiceNote extends Model
         'client_id',
         'trainer_id',
         'client_subscription_id',
+        'date',
         'day',
         'month',
         'year',

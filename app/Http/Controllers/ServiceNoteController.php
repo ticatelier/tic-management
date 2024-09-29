@@ -17,6 +17,47 @@ use App\Mail\NoteNotify;
 
 class ServiceNoteController extends Controller
 {
+    public function note_before(){
+        $myclients = AssignTrainer::where('trainer_id', User::find(Auth::id())->id)->get();
+        return view('trainer.services.beforenote', ['myclients' => $myclients]);
+    }
+
+    public function urenote(Request $request){
+        $date = Carbon::parse($request->date)->format('d-m-Y');
+        echo $date;
+    }
+
+    public function renote(Request $request){
+        $request->validate([
+            'date'=> 'required',
+            'client' => 'required'
+        ]);
+        $date = Carbon::parse($request->date);
+        $monthName = $date->format('F');
+        $day = $date->format('l');
+        $year = $date->format('Y');
+
+        $check = ServiceNote::where([
+            'client_id' => $request->client,
+            'trainer_id' => Auth::id(),
+            'month' => $monthName,
+            'day' => $day,
+            'year' => $year,
+        ])->latest()->first();
+
+        if($check != null){
+            if(Carbon::parse($check->created_at)->format('d-m-Y') == $date->format('d-m-Y')){
+                Alert::error('Duplicate', 'Service note has been added for today');
+                return redirect()->back();
+            }
+        }
+
+        $myclients = AssignTrainer::where('trainer_id', User::find(Auth::id())->id)->get();
+        $client = User::where('id', $request->client)->first();
+        return view('trainer.services.note', ['myclients' => $myclients, 'client' => $client, 'date' => $date->format('Y-m-d')]);
+    }
+
+
     public function note(Request $request){
         $date = Carbon::now();
         $monthName = $date->format('F');
@@ -29,16 +70,18 @@ class ServiceNoteController extends Controller
             'month' => $monthName,
             'day' => $day,
             'year' => $year,
-        ])->first();
+        ])->latest()->first();
 
         if($check != null){
-            Alert::error('Duplicate', 'Service note has been added for today');
-            return redirect()->back();
+            if(Carbon::parse($check->created_at)->format('d-m-Y') == $date->format('d-m-Y')){
+                Alert::error('Duplicate', 'Service note has been added for today');
+                return redirect()->back();
+            }
         }
 
         $myclients = AssignTrainer::where('trainer_id', User::find(Auth::id())->id)->get();
         $client = User::where('id', $request->client)->first();
-        return view('trainer.services.note', ['myclients' => $myclients, 'client' => $client]);
+        return view('trainer.services.note', ['myclients' => $myclients, 'client' => $client, 'date' => $date->format('Y-m-d')]);
     }
 
     public function note_create(Request $request)
@@ -70,9 +113,11 @@ class ServiceNoteController extends Controller
         $end = Carbon::parse($request->timeout);
         $hours = $start->diffInHours($end);
 
-        $date = Carbon::now();
+        
+        $date = Carbon::parse($request->date); 
         $monthName = $date->format('F');
         $day = $date->format('l');
+        $date_day = $date->format('d');
         $year = $date->format('Y');
 
         // Sum of the previous hours and the entered hours
@@ -113,6 +158,7 @@ class ServiceNoteController extends Controller
             'Location' => $request->location,
             'classes_taught' => $request->classes_taught,
             'report' => $request->report,
+            'date' => $date_day,
             'remark' => $request->remark,
             'daily_hour' => $hours,
             'month' => $monthName,
