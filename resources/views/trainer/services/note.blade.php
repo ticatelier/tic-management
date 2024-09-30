@@ -45,7 +45,8 @@
                             <div class="input-block mb-3 row">
                                 <label class="col-form-label col-md-2">Date</label>
                                 <div class="col-md-10">
-                                    <input name="date" type="date" value="{{$date}}" class="form-control" disabled>
+                                    <input type="date" value="{{$date}}" class="form-control" disabled>
+                                    <input name="date" type="date" value="{{$date}}" class="form-control" hidden>
                                 </div>
                             </div>
                             

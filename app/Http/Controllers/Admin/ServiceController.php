@@ -241,7 +241,6 @@ class ServiceController extends Controller
         $request->validate([
             'month' => 'required',
             'year' => 'required',
-            ''
         ]);
 
         if($request->service == 'all'){

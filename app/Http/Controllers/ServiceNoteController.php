@@ -84,6 +84,10 @@ class ServiceNoteController extends Controller
         return view('trainer.services.note', ['myclients' => $myclients, 'client' => $client, 'date' => $date->format('Y-m-d')]);
     }
 
+    public function unnote_create(Request $request){
+        echo $request->date;
+    }
+
     public function note_create(Request $request)
     {
         $request->validate([
